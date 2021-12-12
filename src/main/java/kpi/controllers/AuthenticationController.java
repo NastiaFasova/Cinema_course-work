@@ -22,17 +22,20 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
     private final UserService userService;
+    private final UserMapper userMapper;
 
     public AuthenticationController(AuthenticationService authenticationService,
-                                    UserService userService) {
+                                    UserService userService, UserMapper userMapper) {
         this.authenticationService = authenticationService;
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @PostMapping("/register")
-    public void addUser(@RequestBody @Valid UserRequestDto userRequestDto)
+    public UserResponseDto addUser(@RequestBody @Valid UserRequestDto userRequestDto)
             throws AuthenticationException {
-        authenticationService.register(userRequestDto.getEmail(), userRequestDto.getPassword());
+        return userMapper.getUserResponseDto(authenticationService
+                .register(userRequestDto.getEmail(), userRequestDto.getPassword()));
     }
 
     @PostMapping(path = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
