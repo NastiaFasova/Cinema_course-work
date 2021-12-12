@@ -2,6 +2,8 @@ package kpi.controllers;
 
 import kpi.exception.AuthenticationException;
 import kpi.models.dto.request.UserRequestDto;
+import kpi.models.dto.response.UserResponseDto;
+import kpi.models.mapper.UserMapper;
 import kpi.security.AuthenticationService;
 import javax.validation.Valid;
 

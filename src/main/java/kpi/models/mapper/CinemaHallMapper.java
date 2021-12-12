@@ -19,7 +19,7 @@ public class CinemaHallMapper {
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setCapacity(cinemaHallRequestDto.getCapacity());
         cinemaHall.setDescription(cinemaHallRequestDto.getDescription());
-        cinemaHall.setTitle(cinemaHall.getTitle());
+        cinemaHall.setTitle(cinemaHallRequestDto.getTitle());
         return cinemaHall;
     }
 }
