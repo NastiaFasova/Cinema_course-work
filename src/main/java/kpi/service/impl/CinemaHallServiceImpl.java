@@ -30,4 +30,10 @@ public class CinemaHallServiceImpl implements CinemaHallService {
     public CinemaHall get(Long id) {
         return cinemaHallRepository.findById(id).orElseThrow();
     }
+
+    @Override
+    public boolean deleteById(Long id) {
+        cinemaHallRepository.deleteById(id);
+        return true;
+    }
 }

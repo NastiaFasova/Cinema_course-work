@@ -12,6 +12,6 @@ public class MovieDto {
     @NotNull(message = "MovieTitle can't be null")
     @Size(min = 1, max = 40)
     private String title;
-    @Size(min = 20, max = 200)
-    private String description;
+    private String apiId;
+    private String link;
 }

@@ -7,11 +7,8 @@ import kpi.service.CinemaHallService;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/cinema-halls")
@@ -37,6 +34,11 @@ public class CinemaHallController {
         return cinemaHalls.stream()
                 .map(cinemaHallMapper::getCinemaHallResponseDto)
                 .collect(Collectors.toList());
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteById(@PathVariable Long id) {
+        return cinemaHallService.deleteById(id);
     }
 }
 

@@ -42,27 +42,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.NEVER)
+                .sessionCreationPolicy(SessionCreationPolicy.NEVER)
                 .and()
-                    .addFilterAt(new JwtCsrfFilter(jwtTokenRepository, resolver), CsrfFilter.class)
-                    .csrf().ignoringAntMatchers("/**")
+                .addFilterAt(new JwtCsrfFilter(jwtTokenRepository, resolver), CsrfFilter.class)
+                .csrf().ignoringAntMatchers("/**")
                 .and()
-                    .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/movies/**",
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/movies/**",
                         "/movie-sessions/**", "/cinema-halls/**")
-                    .hasRole("ADMIN")
-                    .antMatchers(HttpMethod.POST, "/orders/complete",
+                .hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/movies/**",
+                        "/movie-sessions/**", "/cinema-halls/**")
+                .hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/orders/complete",
                         "/shopping-carts/**")
-                    .hasRole("USER")
-                    .antMatchers(HttpMethod.GET,  "/hello", "/movies",
+                .hasRole("USER")
+                .antMatchers(HttpMethod.GET, "/hello", "/movies",
                         "/movie-sessions", "/cinema-halls", "/orders")
-                    .hasAnyRole("USER", "ADMIN")
-                    .antMatchers("/login")
-                    .authenticated()
+                .hasAnyRole("USER", "ADMIN")
+                .antMatchers("/login")
+                .authenticated()
                 .and()
-                    .httpBasic()
-                    .authenticationEntryPoint(((request, response, e) -> resolver.resolveException(request, response, null, e)));
-        ;
+                .httpBasic()
+                .authenticationEntryPoint(((request, response, e) -> resolver.resolveException(request, response, null, e)));
     }
 
     @Bean
@@ -71,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/register");
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers("/register", "/movies");
     }
 }

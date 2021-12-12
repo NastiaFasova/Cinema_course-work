@@ -32,4 +32,10 @@ public class MovieSessionServiceImpl implements MovieSessionService {
     public MovieSession get(Long id) {
         return movieSessionRepository.findById(id).orElseThrow();
     }
+
+    @Override
+    public boolean deleteById(Long id) {
+        movieSessionRepository.deleteById(id);
+        return true;
+    }
 }

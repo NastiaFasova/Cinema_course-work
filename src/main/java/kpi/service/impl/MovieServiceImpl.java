@@ -30,4 +30,10 @@ public class MovieServiceImpl implements MovieService {
     public Movie getByTitle(String title) {
         return movieRepository.findByTitle(title);
     }
+
+    @Override
+    public boolean deleteById(Long id) {
+        movieRepository.deleteById(id);
+        return true;
+    }
 }

@@ -9,4 +9,6 @@ public interface MovieService {
     List<Movie> getAll();
 
     Movie getByTitle(String title);
+
+    boolean deleteById(Long id);
 }

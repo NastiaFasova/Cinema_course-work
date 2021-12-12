@@ -9,4 +9,6 @@ public interface CinemaHallService {
     List<CinemaHall> getAll();
 
     CinemaHall get(Long id);
+
+    boolean deleteById(Long id);
 }

@@ -9,12 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/movie-sessions")
@@ -41,5 +37,10 @@ public class MovieSessionController {
         return movieSessions.stream()
                 .map(movieSessionMapper::getMovieSessionResponseDto)
                 .collect(Collectors.toList());
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteById(@PathVariable Long id) {
+        return movieSessionService.deleteById(id);
     }
 }
