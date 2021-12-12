@@ -12,4 +12,6 @@ public interface MovieSessionService {
     MovieSession get(Long id);
 
     boolean deleteById(Long id);
+
+    List<MovieSession> getAll();
 }

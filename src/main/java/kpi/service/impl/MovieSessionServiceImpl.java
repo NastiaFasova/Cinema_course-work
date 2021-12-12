@@ -38,4 +38,9 @@ public class MovieSessionServiceImpl implements MovieSessionService {
         movieSessionRepository.deleteById(id);
         return true;
     }
+
+    @Override
+    public List<MovieSession> getAll() {
+        return movieSessionRepository.findAll();
+    }
 }

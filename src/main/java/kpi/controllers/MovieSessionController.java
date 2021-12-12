@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/movie-sessions")
 public class MovieSessionController {
 
@@ -34,6 +35,14 @@ public class MovieSessionController {
     public List<MovieSessionResponseDto> getAll(@RequestParam (name = "movieId") Long id,
                                                 @RequestParam (name = "date") LocalDate showTime) {
         List<MovieSession> movieSessions = movieSessionService.getAvailableSessions(id, showTime);
+        return movieSessions.stream()
+                .map(movieSessionMapper::getMovieSessionResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping
+    public List<MovieSessionResponseDto> getAll() {
+        List<MovieSession> movieSessions = movieSessionService.getAll();
         return movieSessions.stream()
                 .map(movieSessionMapper::getMovieSessionResponseDto)
                 .collect(Collectors.toList());

@@ -63,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/shopping-carts/**")
                 .hasRole("USER")
                 .antMatchers(HttpMethod.GET, "/hello", "/movies",
-                        "/movie-sessions", "/cinema-halls", "/orders")
+                        "/movie-sessions", "/cinema-halls", "/orders", "/movie-sessions/available")
                 .hasAnyRole("USER", "ADMIN")
                 .antMatchers("/login")
                 .authenticated()
