@@ -37,10 +37,10 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public void complete(@RequestBody @Valid OrderRequestDto orderRequestDto) {
+    public OrderResponseDto complete(@RequestBody @Valid OrderRequestDto orderRequestDto) {
         User user = userService.get(orderRequestDto.getUserId());
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
-        orderService.completeOrder(shoppingCart.getTickets(), user);
+        return orderMapper.getOrderResponseDto(orderService.completeOrder(shoppingCart.getTickets(), user));
     }
 
     @GetMapping

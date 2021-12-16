@@ -27,8 +27,9 @@ public class MovieSessionController {
     }
 
     @PostMapping
-    public void add(@RequestBody @Valid MovieSessionRequestDto movieSessionRequestDto) {
-        movieSessionService.add(movieSessionMapper.getMovieSession(movieSessionRequestDto));
+    public MovieSessionResponseDto add(@RequestBody @Valid MovieSessionRequestDto movieSessionRequestDto) {
+        return movieSessionMapper.getMovieSessionResponseDto(movieSessionService
+                .add(movieSessionMapper.getMovieSession(movieSessionRequestDto)));
     }
 
     @GetMapping("/available")
