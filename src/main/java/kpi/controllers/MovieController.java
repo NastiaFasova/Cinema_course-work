@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/movies")
 public class MovieController {
 

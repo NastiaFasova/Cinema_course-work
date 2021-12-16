@@ -46,21 +46,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.NEVER)
                 .and()
                 .addFilterAt(new JwtCsrfFilter(jwtTokenRepository, resolver), CsrfFilter.class)
-                .csrf().ignoringAntMatchers("/**")
+                .csrf().ignoringAntMatchers("/")
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/movies/**",
-                        "/movie-sessions/**", "/cinema-halls/**")
+                .antMatchers(HttpMethod.POST, "/movies/",
+                        "/movie-sessions/", "/cinema-halls/")
                 .hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/movies/**",
-                        "/movie-sessions/**", "/cinema-halls/**")
+                .antMatchers(HttpMethod.DELETE, "/movies/",
+                        "/movie-sessions/", "/cinema-halls/")
                 .hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/orders/complete",
-                        "/shopping-carts/**")
+                        "/shopping-carts/")
                 .hasRole("USER")
                 .antMatchers(HttpMethod.GET, "/hello", "/movies",
                         "/movie-sessions", "/cinema-halls", "/orders", "/movie-sessions/available")
