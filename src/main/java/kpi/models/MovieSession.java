@@ -30,4 +30,6 @@ public class MovieSession {
     @ManyToOne
     private CinemaHall cinemaHall;
     private LocalDateTime showTime;
+    private Integer maxTicketCount;
+    private Integer currentTicketCount;
 }
