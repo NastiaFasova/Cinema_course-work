@@ -3,6 +3,10 @@ package kpi.service.impl;
 import kpi.repository.UserRepository;
 import kpi.models.User;
 import kpi.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -53,5 +57,16 @@ public class UserServiceImpl implements UserService {
         User user = get(userId);
         user.setBlocked(false);
         return userRepository.save(user);
+    }
+
+    @Override
+    public Page<User> findAllPaginated(String keyword, int page, int size, String sortField, String sortDir) {
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+        if (keyword == null) {
+            return userRepository.findAll(pageable);
+        }
+        return userRepository.findAllByLastnameContaining(keyword, pageable);
     }
 }

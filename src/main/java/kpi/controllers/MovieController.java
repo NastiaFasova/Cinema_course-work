@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Page;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,12 +30,22 @@ public class MovieController {
         return movieMapper.getMovieResponseDto(movieService.add(movieMapper.getMovie(movieRequestDto)));
     }
 
+//    @GetMapping
+//    public List<MovieDto> getAll() {
+//        List<Movie> movies = movieService.getAll();
+//        return movies.stream()
+//                .map(movieMapper::getMovieResponseDto)
+//                .collect(Collectors.toList());
+//    }
+
     @GetMapping
-    public List<MovieDto> getAll() {
-        List<Movie> movies = movieService.getAll();
-        return movies.stream()
-                .map(movieMapper::getMovieResponseDto)
-                .collect(Collectors.toList());
+    public List<Movie> viewMovies(@RequestParam(required = false) String keyword,
+                            @RequestParam(defaultValue = "1") int page,
+                            @RequestParam(defaultValue = "7") int size,
+                            @RequestParam(value = "sortField", defaultValue = "title") String sortField,
+                            @RequestParam(value = "sortDir", defaultValue = "asc") String sortDir) {
+        Page<Movie> pageTuts = movieService.findAllPaginated(keyword, page, size, sortField, sortDir);
+        return pageTuts.getContent();
     }
 
     @DeleteMapping("/{id}")

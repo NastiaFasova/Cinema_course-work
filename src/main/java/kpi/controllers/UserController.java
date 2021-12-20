@@ -1,9 +1,11 @@
 package kpi.controllers;
 
+import kpi.models.Movie;
 import kpi.models.User;
 import kpi.models.dto.response.UserResponseDto;
 import kpi.models.mapper.UserMapper;
 import kpi.service.UserService;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +29,22 @@ public class UserController {
         return userMapper.getUserResponseDto(userService.getByEmail(email));
     }
 
+//    @GetMapping
+//    public List<UserResponseDto> getAll() {
+//        List<User> users = userService.getAll();
+//        return users.stream()
+//                .map(userMapper::getUserResponseDto)
+//                .collect(Collectors.toList());
+//    }
+
     @GetMapping
-    public List<UserResponseDto> getAll() {
-        List<User> users = userService.getAll();
-        return users.stream()
-                .map(userMapper::getUserResponseDto)
-                .collect(Collectors.toList());
+    public List<User> viewUsers(@RequestParam(required = false) String keyword,
+                                  @RequestParam(defaultValue = "1") int page,
+                                  @RequestParam(defaultValue = "7") int size,
+                                  @RequestParam(value = "sortField", defaultValue = "surname") String sortField,
+                                  @RequestParam(value = "sortDir", defaultValue = "asc") String sortDir) {
+        Page<User> pageTuts = userService.findAllPaginated(keyword, page, size, sortField, sortDir);
+        return pageTuts.getContent();
     }
 
     @GetMapping("/block/{id}")
