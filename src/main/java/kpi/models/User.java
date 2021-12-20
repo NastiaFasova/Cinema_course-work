@@ -23,4 +23,5 @@ public class User {
     @OneToOne(cascade =  CascadeType.ALL,
             mappedBy = "user")
     private Bill bill;
+    private boolean blocked;
 }

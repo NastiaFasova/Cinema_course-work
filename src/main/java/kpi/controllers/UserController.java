@@ -34,4 +34,14 @@ public class UserController {
                 .map(userMapper::getUserResponseDto)
                 .collect(Collectors.toList());
     }
+
+    @GetMapping("/block/{id}")
+    public UserResponseDto block(@PathVariable(value = "id") long id) {
+        return userMapper.getUserResponseDto(userService.block(id));
+    }
+
+    @GetMapping("/unblock/{id}")
+    public UserResponseDto unblock(@PathVariable(value = "id") long id) {
+        return userMapper.getUserResponseDto(userService.unblock(id));
+    }
 }

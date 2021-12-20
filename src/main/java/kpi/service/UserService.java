@@ -12,4 +12,8 @@ public interface UserService {
     User getByEmail(String email);
 
     User get(Long id);
+
+    User block(Long id);
+
+    User unblock(Long id);
 }
