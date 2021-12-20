@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,12 +26,14 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final UserService userService;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public AuthenticationController(AuthenticationService authenticationService,
-                                    UserService userService, UserMapper userMapper) {
+                                    UserService userService, UserMapper userMapper, PasswordEncoder passwordEncoder) {
         this.authenticationService = authenticationService;
         this.userService = userService;
         this.userMapper = userMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/register")
@@ -41,14 +44,14 @@ public class AuthenticationController {
     }
 
     @PostMapping(path = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody kpi.models.User getAuthUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null) {
-            return null;
+    public @ResponseBody kpi.models.User getAuthUser(@RequestBody @Valid UserRequestDto userRequestDto)
+            throws AuthenticationException {
+        kpi.models.User loggedInUser = Objects.nonNull(userRequestDto)
+                ? userService.getByEmail(userRequestDto.getEmail()) : null;
+        if (loggedInUser != null && passwordEncoder.matches(userRequestDto.getPassword(), loggedInUser.getPassword())) {
+            return loggedInUser;
         }
-        Object principal = auth.getPrincipal();
-        User user = (principal instanceof User) ? (User) principal : null;
-        return Objects.nonNull(user) ? userService.getByEmail(user.getUsername()) : null;
+        throw new AuthenticationException("Wrong login or password");
     }
 
 }

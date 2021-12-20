@@ -52,15 +52,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.NEVER)
                 .and()
                 .addFilterAt(new JwtCsrfFilter(jwtTokenRepository, resolver), CsrfFilter.class)
-                .csrf().ignoringAntMatchers("/")
-                .and()
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(
                         "/v2/api-docs",
                         "/swagger-resources/**",
                         "/swagger-ui.html",
                         "/webjars/**",
-                        "/swagger.json")
+                        "/swagger.json", "/login")
                 .permitAll()
                 .antMatchers(HttpMethod.POST, "/movies/",
                         "/movie-sessions/", "/cinema-halls/")
@@ -77,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/hello", "/movies",
                         "/movie-sessions", "/cinema-halls", "/orders", "/movie-sessions/available")
                 .hasAnyRole("USER", "ADMIN")
-                .antMatchers("/login")
+                .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic()
