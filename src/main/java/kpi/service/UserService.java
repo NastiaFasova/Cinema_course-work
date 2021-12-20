@@ -2,8 +2,12 @@ package kpi.service;
 
 import kpi.models.User;
 
+import java.util.List;
+
 public interface UserService {
     User add(User user);
+
+    List<User> getAll();
 
     User getByEmail(String email);
 

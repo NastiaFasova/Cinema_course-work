@@ -1,12 +1,15 @@
 package kpi.controllers;
 
+import kpi.models.User;
 import kpi.models.dto.response.UserResponseDto;
 import kpi.models.mapper.UserMapper;
 import kpi.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -22,5 +25,13 @@ public class UserController {
     @GetMapping("/by-email")
     public UserResponseDto getByEmail(@RequestParam(name = "email") String email) {
         return userMapper.getUserResponseDto(userService.getByEmail(email));
+    }
+
+    @GetMapping
+    public List<UserResponseDto> getAll() {
+        List<User> users = userService.getAll();
+        return users.stream()
+                .map(userMapper::getUserResponseDto)
+                .collect(Collectors.toList());
     }
 }
