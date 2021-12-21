@@ -52,8 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.NEVER)
                 .and()
                 .addFilterAt(new JwtCsrfFilter(jwtTokenRepository, resolver), CsrfFilter.class)
-                .csrf().ignoringAntMatchers("/")
-                .and()
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/movies/",
                         "/movie-sessions/", "/cinema-halls/")
@@ -64,11 +63,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/orders/complete",
                         "/shopping-carts/")
                 .hasRole("USER")
-                .antMatchers(HttpMethod.GET, "/hello", "/movies",
+                .antMatchers(HttpMethod.GET, "/login", "/movies",
                         "/movie-sessions", "/cinema-halls", "/orders", "/movie-sessions/available")
                 .hasAnyRole("USER", "ADMIN")
-                .antMatchers("/login")
-                .authenticated()
                 .and()
                 .httpBasic()
                 .authenticationEntryPoint(((request, response, e) -> resolver.resolveException(request, response, null, e)));

@@ -24,7 +24,7 @@ public class CinemaHallController {
     }
 
     @PostMapping
-    public CinemaHall add(@RequestBody @Valid CinemaHallDto cinemaHallRequestDto) {
+    public @ResponseBody CinemaHall add(@RequestBody @Valid CinemaHallDto cinemaHallRequestDto) {
         return cinemaHallService.add(cinemaHallMapper.getCinemaHall(cinemaHallRequestDto));
     }
 

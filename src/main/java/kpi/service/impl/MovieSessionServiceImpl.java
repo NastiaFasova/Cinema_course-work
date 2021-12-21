@@ -29,6 +29,17 @@ public class MovieSessionServiceImpl implements MovieSessionService {
     }
 
     @Override
+    public MovieSession add(MovieSession session, String id) {
+        MovieSession current = get(Long.parseLong(id));
+        current.setCurrentTicketCount(session.getCurrentTicketCount());
+        current.setMovie(session.getMovie());
+        current.setCinemaHall(session.getCinemaHall());
+        current.setShowTime(session.getShowTime());
+        current.setMaxTicketCount(session.getMaxTicketCount());
+        return movieSessionRepository.save(current);
+    }
+
+    @Override
     public MovieSession get(Long id) {
         return movieSessionRepository.findById(id).orElseThrow();
     }

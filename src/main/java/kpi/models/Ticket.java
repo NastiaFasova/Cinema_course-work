@@ -22,4 +22,5 @@ public class Ticket {
 
     @ManyToOne
     private User user;
+    private Double price;
 }

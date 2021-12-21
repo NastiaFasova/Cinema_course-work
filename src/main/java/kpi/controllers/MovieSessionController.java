@@ -43,11 +43,18 @@ public class MovieSessionController {
 
 
     @GetMapping
-    public List<MovieSessionResponseDto> getAll() {
+    public @ResponseBody List<MovieSessionResponseDto> getAll() {
         List<MovieSession> movieSessions = movieSessionService.getAll();
         return movieSessions.stream()
                 .map(movieSessionMapper::getMovieSessionResponseDto)
                 .collect(Collectors.toList());
+    }
+
+    @PatchMapping("/{id}")
+    public MovieSessionResponseDto update(@RequestBody @Valid MovieSessionRequestDto movieSessionRequestDto,
+                                          @PathVariable("id") String id) {
+        return movieSessionMapper.getMovieSessionResponseDto(movieSessionService
+                .add(movieSessionMapper.getMovieSession(movieSessionRequestDto), id));
     }
 
     @DeleteMapping("/{id}")

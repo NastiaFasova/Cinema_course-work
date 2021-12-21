@@ -17,4 +17,9 @@ public class UserRequestDto {
     private String password;
     @Size(min = 6)
     private String repeatPassword;
+    @Size(min = 1)
+    private String firstname;
+    @Size(min = 1)
+    private String lastname;
+    private String avatarUrl;
 }

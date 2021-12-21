@@ -1,6 +1,7 @@
 package kpi.models.mapper;
 
 import kpi.models.User;
+import kpi.models.dto.request.UserRequestDto;
 import kpi.models.dto.response.UserResponseDto;
 import org.springframework.stereotype.Component;
 
@@ -11,5 +12,14 @@ public class UserMapper {
         userResponseDto.setId(user.getId());
         userResponseDto.setEmail(user.getEmail());
         return userResponseDto;
+    }
+
+    public User getUser(UserRequestDto userRequestDto) {
+        User user = new User();
+        user.setEmail(userRequestDto.getEmail());
+        user.setFirstname(userRequestDto.getFirstname());
+        user.setLastname(userRequestDto.getLastname());
+        user.setAvatarUrl(userRequestDto.getAvatarUrl());
+        return user;
     }
 }

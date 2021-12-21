@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,12 +25,17 @@ public class MovieController {
     }
 
     @PostMapping
-    public MovieDto add(@RequestBody @Valid MovieDto movieRequestDto) {
+    public @ResponseBody MovieDto add(@RequestBody @Valid MovieDto movieRequestDto) {
         return movieMapper.getMovieResponseDto(movieService.add(movieMapper.getMovie(movieRequestDto)));
     }
 
+    @PatchMapping("/{id}")
+    public @ResponseBody Movie update(@RequestBody @Validated MovieDto movieDto, @PathVariable("id") String id) {
+        return movieService.add(movieMapper.getMovie(movieDto), id);
+    }
+
     @GetMapping
-    public List<MovieDto> getAll() {
+    public @ResponseBody List<MovieDto> getAll() {
         List<Movie> movies = movieService.getAll();
         return movies.stream()
                 .map(movieMapper::getMovieResponseDto)

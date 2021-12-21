@@ -22,6 +22,20 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public Movie add(Movie movie, String id) {
+        Movie current = get(Long.parseLong(id));
+        current.setTitle(movie.getTitle());
+        current.setLink(movie.getLink());
+        current.setApiId(movie.getApiId());
+        return movieRepository.save(current);
+    }
+
+    @Override
+    public Movie get(long id) {
+        return movieRepository.findById(id).orElseThrow();
+    }
+
+    @Override
     public List<Movie> getAll() {
         return movieRepository.findAll();
     }
