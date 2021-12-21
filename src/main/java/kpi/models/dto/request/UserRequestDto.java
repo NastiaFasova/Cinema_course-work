@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 
 @Setter
 @Getter
-@PasswordMatch()
 public class UserRequestDto {
     @EmailValidation
     private String email;
