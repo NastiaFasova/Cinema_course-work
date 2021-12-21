@@ -1,19 +1,12 @@
 package kpi.util;
 
-import kpi.exception.DuplicateEmailException;
-import kpi.exception.DuplicateFilmException;
-import kpi.exception.NoFreePlaceException;
-import kpi.exception.NotEnoughMoneyException;
+import kpi.exception.*;
 import kpi.security.JwtTokenRepository;
 import lombok.Getter;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.session.SessionAuthenticationException;
-import org.springframework.security.web.csrf.InvalidCsrfTokenException;
-import org.springframework.security.web.csrf.MissingCsrfTokenException;
 import org.springframework.security.web.util.UrlUtils;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
