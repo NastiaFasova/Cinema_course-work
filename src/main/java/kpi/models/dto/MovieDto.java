@@ -1,5 +1,7 @@
 package kpi.models.dto;
 
+import kpi.service.MovieService;
+import kpi.validation.Unique;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -12,6 +14,7 @@ public class MovieDto {
     @NotNull(message = "MovieTitle can't be null")
     @Size(min = 1, max = 40)
     private String title;
+    @Unique(service = MovieService.class, fieldName = "apiId", message = "This movie is already in database")
     private String apiId;
     private String link;
 }

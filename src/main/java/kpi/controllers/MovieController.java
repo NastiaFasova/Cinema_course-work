@@ -5,11 +5,9 @@ import kpi.models.dto.MovieDto;
 import kpi.models.mapper.MovieMapper;
 import kpi.service.MovieService;
 import java.util.List;
-import java.util.stream.Collectors;
-import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
-import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,12 +24,12 @@ public class MovieController {
     }
 
     @PostMapping
-    public Movie add(@RequestBody @Valid MovieDto movieRequestDto) {
+    public Movie add(@RequestBody @Validated MovieDto movieRequestDto) {
         return movieService.add(movieMapper.getMovie(movieRequestDto));
     }
 
     @PatchMapping("/{id}")
-    public Movie update(@RequestBody @Valid MovieDto movieDto, @PathVariable("id") String id) {
+    public Movie update(@RequestBody @Validated MovieDto movieDto, @PathVariable("id") String id) {
         return movieService.add(movieMapper.getMovie(movieDto), id);
     }
 

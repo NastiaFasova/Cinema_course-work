@@ -5,7 +5,6 @@ import kpi.models.dto.request.UserRequestDto;
 import kpi.models.dto.response.UserResponseDto;
 import kpi.models.mapper.UserMapper;
 import kpi.security.AuthenticationService;
-import javax.validation.Valid;
 
 import kpi.service.UserService;
 import org.springframework.http.MediaType;
@@ -13,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,14 +37,14 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public UserResponseDto addUser(@RequestBody @Valid UserRequestDto userRequestDto)
+    public UserResponseDto addUser(@RequestBody @Validated UserRequestDto userRequestDto)
             throws AuthenticationException {
         return userMapper.getUserResponseDto(authenticationService
                 .register(userRequestDto.getEmail(), userRequestDto.getPassword()));
     }
 
     @PostMapping(path = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody kpi.models.User getAuthUser(@RequestBody @Valid UserRequestDto userRequestDto)
+    public @ResponseBody kpi.models.User getAuthUser(@RequestBody @Validated UserRequestDto userRequestDto)
             throws AuthenticationException {
         kpi.models.User loggedInUser = Objects.nonNull(userRequestDto)
                 ? userService.getByEmail(userRequestDto.getEmail()) : null;

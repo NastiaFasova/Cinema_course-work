@@ -1,8 +1,10 @@
 package kpi.service.impl;
 
+import io.jsonwebtoken.lang.Assert;
 import kpi.repository.MovieRepository;
 import kpi.models.Movie;
 import kpi.service.MovieService;
+
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -69,5 +71,17 @@ public class MovieServiceImpl implements MovieService {
     public boolean deleteById(Long id) {
         movieRepository.deleteById(id);
         return true;
+    }
+
+    @Override
+    public boolean fieldValueExists(Object value, String fieldName) throws UnsupportedOperationException {
+        Assert.notNull(fieldName);
+        if (!fieldName.equals("apiId")) {
+            throw new UnsupportedOperationException("Field name not supported");
+        }
+        if (value == null) {
+            return false;
+        }
+        return movieRepository.getByApiId(value.toString()) == null;
     }
 }
