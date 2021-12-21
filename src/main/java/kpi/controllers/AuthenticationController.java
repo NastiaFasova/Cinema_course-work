@@ -48,7 +48,8 @@ public class AuthenticationController {
             throws AuthenticationException {
         kpi.models.User loggedInUser = Objects.nonNull(userRequestDto)
                 ? userService.getByEmail(userRequestDto.getEmail()) : null;
-        if (loggedInUser != null && passwordEncoder.matches(userRequestDto.getPassword(), loggedInUser.getPassword())) {
+        if (loggedInUser != null && passwordEncoder.matches(userRequestDto.getPassword(),
+                loggedInUser.getPassword())) {
             return loggedInUser;
         }
         throw new AuthenticationException("Wrong login or password");
