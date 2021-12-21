@@ -29,6 +29,12 @@ public class BillController {
         return billService.save(billMapper.getBill(bill));
     }
 
+    @PatchMapping("/bill")
+    public Bill update(@RequestBody @Validated BillDto bill, Authentication authentication) {
+        Long billId = userService.getByEmail(authentication.getName()).getBill().getId();
+        return billService.save(billMapper.getBill(bill), billId);
+    }
+
     @GetMapping("/bill")
     public BillDto viewBill(Authentication authentication) {
         User user = userService.getByEmail(authentication.getName());

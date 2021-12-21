@@ -35,6 +35,14 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
+    public Bill save(Bill bill, Long id) {
+        Bill current = findById(id);
+        bill.setUser(current.getUser());
+        bill.setAmountOfMoney(current.getAmountOfMoney());
+        return billRepository.save(current);
+    }
+
+    @Override
     public boolean delete(Long billId) {
         billRepository.deleteById(billId);
         return true;
