@@ -36,13 +36,8 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> viewUsers(@RequestParam(required = false) String keyword,
-                                  @RequestParam(defaultValue = "1") int page,
-                                  @RequestParam(defaultValue = "7") int size,
-                                  @RequestParam(value = "sortField", defaultValue = "surname") String sortField,
-                                  @RequestParam(value = "sortDir", defaultValue = "asc") String sortDir) {
-        Page<User> pageTuts = userService.findAllPaginated(keyword, page, size, sortField, sortDir);
-        return pageTuts.getContent();
+    public List<User> viewUsers(@RequestParam(required = false) String keyword) {
+        return userService.findAll(keyword);
     }
 
     @GetMapping("/block/{id}")

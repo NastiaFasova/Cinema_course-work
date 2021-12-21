@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,5 +17,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
 
     @Query("SELECT u FROM User u LEFT JOIN FETCH u.roles Role where u.lastname like %:keyword%")
-    Page<User> findAllByLastnameContaining(String keyword, Pageable pageable);
+    List<User> findAllByLastnameContaining(String keyword);
 }

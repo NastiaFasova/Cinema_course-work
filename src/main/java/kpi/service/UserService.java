@@ -20,5 +20,5 @@ public interface UserService {
 
     User unblock(Long id);
 
-    Page<User> findAllPaginated(String keyword, int page, int size, String sortField, String sortDir);
+    List<User> findAll(String keyword);
 }

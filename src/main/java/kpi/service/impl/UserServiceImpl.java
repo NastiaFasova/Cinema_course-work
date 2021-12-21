@@ -71,13 +71,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<User> findAllPaginated(String keyword, int page, int size, String sortField, String sortDir) {
-        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
-                Sort.by(sortField).descending();
-        Pageable pageable = PageRequest.of(page - 1, size, sort);
+    public List<User> findAll(String keyword) {
         if (keyword == null) {
-            return userRepository.findAll(pageable);
+            return userRepository.findAll();
         }
-        return userRepository.findAllByLastnameContaining(keyword, pageable);
+        return userRepository.findAllByLastnameContaining(keyword);
     }
 }
