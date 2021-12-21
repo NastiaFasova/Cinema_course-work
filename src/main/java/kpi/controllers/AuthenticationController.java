@@ -1,6 +1,7 @@
 package kpi.controllers;
 
 import kpi.exception.AuthenticationException;
+import kpi.models.dto.request.UserRegistrationDto;
 import kpi.models.dto.request.UserRequestDto;
 import kpi.models.dto.response.UserResponseDto;
 import kpi.models.mapper.UserMapper;
@@ -37,7 +38,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public UserResponseDto addUser(@RequestBody @Validated UserRequestDto userRequestDto)
+    public UserResponseDto addUser(@RequestBody @Validated UserRegistrationDto userRequestDto)
             throws AuthenticationException {
         return userMapper.getUserResponseDto(authenticationService
                 .register(userRequestDto.getEmail(), userRequestDto.getPassword()));
