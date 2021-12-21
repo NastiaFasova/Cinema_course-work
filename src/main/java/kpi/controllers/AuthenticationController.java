@@ -1,6 +1,7 @@
 package kpi.controllers;
 
 import kpi.exception.AuthenticationException;
+import kpi.exception.DuplicateEmailException;
 import kpi.models.dto.request.UserRegistrationDto;
 import kpi.models.dto.request.UserRequestDto;
 import kpi.models.dto.response.UserResponseDto;
@@ -14,10 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -38,8 +36,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
+    @CrossOrigin
     public UserResponseDto addUser(@RequestBody @Validated UserRegistrationDto userRequestDto)
             throws AuthenticationException {
+        if (userService.getByEmail(userRequestDto.getEmail()) != null) {
+            throw new DuplicateEmailException("There ia already a registered user with this email");
+        }
         return userMapper.getUserResponseDto(authenticationService
                 .register(userRequestDto.getEmail(), userRequestDto.getPassword()));
     }

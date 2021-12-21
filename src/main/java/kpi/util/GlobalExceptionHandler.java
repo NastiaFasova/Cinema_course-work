@@ -1,5 +1,6 @@
 package kpi.util;
 
+import kpi.exception.DuplicateEmailException;
 import kpi.exception.DuplicateFilmException;
 import kpi.exception.NoFreePlaceException;
 import kpi.exception.NotEnoughMoneyException;
@@ -46,8 +47,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         this.tokenRepository = tokenRepository;
     }
 
-    @ExceptionHandler({AuthenticationException.class, MissingCsrfTokenException.class, InvalidCsrfTokenException.class,
-            SessionAuthenticationException.class})
+    @ExceptionHandler({AuthenticationException.class})
     public ErrorInfo handleAuthenticationException(RuntimeException ex, HttpServletRequest request,
                                                    HttpServletResponse response){
         this.tokenRepository.clearToken(response);
@@ -71,6 +71,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ErrorInfo handleDuplicateFilmExceptionException(RuntimeException ex, HttpServletRequest request,
                                                    HttpServletResponse response){
         return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "This film is already in database");
+    }
+
+    @ExceptionHandler({DuplicateEmailException.class})
+    public ErrorInfo handleDuplicateEmailException(RuntimeException ex, HttpServletRequest request,
+                                                           HttpServletResponse response){
+        return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "There ia already a registered user with this email");
     }
 
     @Override
