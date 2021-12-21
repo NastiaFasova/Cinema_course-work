@@ -15,5 +15,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u LEFT JOIN FETCH u.roles Role where u.email = :email")
     User findByEmail(String email);
 
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.roles Role where u.lastname like %:keyword%")
     Page<User> findAllByLastnameContaining(String keyword, Pageable pageable);
 }
