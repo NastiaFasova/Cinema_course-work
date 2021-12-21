@@ -1,6 +1,5 @@
 package kpi.service;
 
-import kpi.models.Movie;
 import kpi.models.User;
 import org.springframework.data.domain.Page;
 
@@ -8,6 +7,8 @@ import java.util.List;
 
 public interface UserService {
     User add(User user);
+
+    User add(User user, String id);
 
     List<User> getAll();
 

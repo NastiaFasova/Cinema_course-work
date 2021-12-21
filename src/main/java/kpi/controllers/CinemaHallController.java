@@ -28,6 +28,11 @@ public class CinemaHallController {
         return cinemaHallService.add(cinemaHallMapper.getCinemaHall(cinemaHallRequestDto));
     }
 
+    @PatchMapping("/{id}")
+    public CinemaHall update(@RequestBody @Valid CinemaHallDto cinemaHallRequestDto, @PathVariable("id") String id) {
+        return cinemaHallService.add(cinemaHallMapper.getCinemaHall(cinemaHallRequestDto), id);
+    }
+
     @GetMapping
     public List<CinemaHallDto> getAll() {
         List<CinemaHall> cinemaHalls = cinemaHallService.getAll();

@@ -1,17 +1,15 @@
 package kpi.controllers;
 
-import kpi.models.Movie;
 import kpi.models.User;
+import kpi.models.dto.request.UserRequestDto;
 import kpi.models.dto.response.UserResponseDto;
 import kpi.models.mapper.UserMapper;
 import kpi.service.UserService;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -29,13 +27,13 @@ public class UserController {
         return userMapper.getUserResponseDto(userService.getByEmail(email));
     }
 
-//    @GetMapping
-//    public List<UserResponseDto> getAll() {
-//        List<User> users = userService.getAll();
-//        return users.stream()
-//                .map(userMapper::getUserResponseDto)
-//                .collect(Collectors.toList());
-//    }
+
+    @PatchMapping("/{id}")
+    public UserResponseDto update(@RequestBody @Valid UserRequestDto userRequestDto,
+                                          @PathVariable("id") String id) {
+        return userMapper.getUserResponseDto(userService
+                .add(userMapper.getUser(userRequestDto), id));
+    }
 
     @GetMapping
     public List<User> viewUsers(@RequestParam(required = false) String keyword,

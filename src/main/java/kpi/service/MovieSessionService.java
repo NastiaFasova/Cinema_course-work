@@ -9,6 +9,8 @@ public interface MovieSessionService {
 
     MovieSession add(MovieSession session);
 
+    MovieSession add(MovieSession session, String id);
+
     MovieSession get(Long id);
 
     boolean deleteById(Long id);

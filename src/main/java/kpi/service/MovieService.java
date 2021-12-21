@@ -2,14 +2,17 @@ package kpi.service;
 
 import kpi.models.Movie;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 public interface MovieService {
     Movie add(Movie movie);
 
+    Movie add(Movie movie, String id);
+
     List<Movie> getAll();
+
+    Movie get(Long id);
 
     Movie getByTitle(String title);
 

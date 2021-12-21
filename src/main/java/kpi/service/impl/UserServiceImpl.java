@@ -31,6 +31,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User add(User user, String id) {
+        User current = get(Long.parseLong(id));
+        current.setEmail(user.getEmail());
+        current.setLastname(user.getLastname());
+        current.setFirstname(user.getFirstname());
+        current.setAvatarUrl(user.getAvatarUrl());
+        current.setFirstname(user.getFirstname());
+        return userRepository.save(current);
+    }
+
+    @Override
     public List<User> getAll() {
         return userRepository.findAll();
     }

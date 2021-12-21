@@ -26,17 +26,14 @@ public class MovieController {
     }
 
     @PostMapping
-    public MovieDto add(@RequestBody @Valid MovieDto movieRequestDto) {
-        return movieMapper.getMovieResponseDto(movieService.add(movieMapper.getMovie(movieRequestDto)));
+    public Movie add(@RequestBody @Valid MovieDto movieRequestDto) {
+        return movieService.add(movieMapper.getMovie(movieRequestDto));
     }
 
-//    @GetMapping
-//    public List<MovieDto> getAll() {
-//        List<Movie> movies = movieService.getAll();
-//        return movies.stream()
-//                .map(movieMapper::getMovieResponseDto)
-//                .collect(Collectors.toList());
-//    }
+    @PatchMapping("/{id}")
+    public Movie update(@RequestBody @Valid MovieDto movieDto, @PathVariable("id") String id) {
+        return movieService.add(movieMapper.getMovie(movieDto), id);
+    }
 
     @GetMapping
     public List<Movie> viewMovies(@RequestParam(required = false) String keyword,
