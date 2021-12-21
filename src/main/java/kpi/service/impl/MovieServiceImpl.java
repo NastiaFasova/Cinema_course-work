@@ -72,16 +72,4 @@ public class MovieServiceImpl implements MovieService {
         movieRepository.deleteById(id);
         return true;
     }
-
-    @Override
-    public boolean fieldValueExists(Object value, String fieldName) throws UnsupportedOperationException {
-        Assert.notNull(fieldName);
-        if (!fieldName.equals("apiId")) {
-            throw new UnsupportedOperationException("Field name not supported");
-        }
-        if (value == null) {
-            return false;
-        }
-        return movieRepository.getByApiId(value.toString()) == null;
-    }
 }

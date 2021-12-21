@@ -1,5 +1,6 @@
 package kpi.util;
 
+import kpi.exception.DuplicateFilmException;
 import kpi.exception.NoFreePlaceException;
 import kpi.exception.NotEnoughMoneyException;
 import kpi.security.JwtTokenRepository;
@@ -64,6 +65,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ErrorInfo handleNotEnoughMoneyException(RuntimeException ex, HttpServletRequest request,
                                                 HttpServletResponse response){
         return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "Not enough money to but a ticket");
+    }
+
+    @ExceptionHandler({DuplicateFilmException.class})
+    public ErrorInfo handleDuplicateFilmExceptionException(RuntimeException ex, HttpServletRequest request,
+                                                   HttpServletResponse response){
+        return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "This film is already in database");
     }
 
     @Override

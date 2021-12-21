@@ -1,12 +1,11 @@
 package kpi.service;
 
 import kpi.models.Movie;
-import kpi.validation.FieldValueExists;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-public interface MovieService extends FieldValueExists {
+public interface MovieService {
     Movie add(Movie movie);
 
     Movie add(Movie movie, String id);

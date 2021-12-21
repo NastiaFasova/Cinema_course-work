@@ -16,8 +16,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     Page<Movie> findAllByTitleContaining(String title, Pageable pageable);
 
-    boolean existsByApiId(String toString);
-
     Movie getByApiId(String apiId);
 }
 

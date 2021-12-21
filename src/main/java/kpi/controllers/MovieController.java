@@ -1,5 +1,6 @@
 package kpi.controllers;
 
+import kpi.exception.DuplicateFilmException;
 import kpi.models.Movie;
 import kpi.models.dto.MovieDto;
 import kpi.models.mapper.MovieMapper;
@@ -25,6 +26,9 @@ public class MovieController {
 
     @PostMapping
     public Movie add(@RequestBody @Validated MovieDto movieRequestDto) {
+        if (movieService.getByApiId(movieRequestDto.getApiId()) != null) {
+            throw new DuplicateFilmException("This film is already in database");
+        }
         return movieService.add(movieMapper.getMovie(movieRequestDto));
     }
 
