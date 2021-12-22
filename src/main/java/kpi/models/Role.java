@@ -25,4 +25,9 @@ public class Role {
     public enum RoleName {
         USER, ADMIN
     }
+
+    @Override
+    public String toString() {
+        return "roleName:" + roleName;
+    }
 }
