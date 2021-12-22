@@ -13,5 +13,6 @@ public class UserResponseDto {
     private String lastname;
     private String avatarUrl;
     private String role;
+    private boolean blocked;
     private CsrfToken token;
 }

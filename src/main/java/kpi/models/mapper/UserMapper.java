@@ -15,6 +15,7 @@ public class UserMapper {
         userResponseDto.setLastname(user.getLastname());
         userResponseDto.setAvatarUrl(user.getAvatarUrl());
         userResponseDto.setRole(user.getRoles().toString());
+        userResponseDto.setBlocked(user.isBlocked());
         return userResponseDto;
     }
 
