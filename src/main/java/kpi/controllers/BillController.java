@@ -37,8 +37,7 @@ public class BillController {
     }
 
     @GetMapping("/bill")
-    public BillDto viewBill() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public BillDto viewBill(Authentication authentication) {
         User user = userService.getByEmail(authentication.getName());
         return billMapper.getBillDto(user.getBill());
     }

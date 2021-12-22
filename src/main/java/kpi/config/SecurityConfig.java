@@ -51,8 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.NEVER)
                 .and()
-                .csrf().ignoringAntMatchers("/**")
-                .and()
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/login")
                 .authenticated()
@@ -68,10 +67,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/orders/complete",
                         "/shopping-carts/**", "/bill")
                 .hasRole("USER")
-                .antMatchers(HttpMethod.GET, "/bill")
-                .hasRole("USER")
+//                .antMatchers(HttpMethod.GET, "/bill")
+//                .hasRole("USER")
                 .antMatchers(HttpMethod.GET, "/register", "/login", "/hello", "/movies",
-                        "/movie-sessions", "/cinema-halls", "/orders", "/users/{id}")
+                        "/movie-sessions", "/cinema-halls", "/orders", "/users/{id}", "/bill")
                 .hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()

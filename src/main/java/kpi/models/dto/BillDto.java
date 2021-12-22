@@ -1,6 +1,5 @@
 package kpi.models.dto;
 
-import kpi.models.User;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -12,5 +11,5 @@ public class BillDto {
     @Positive
     @Min(0)
     private Double amountOfMoney;
-    private User user;
+    private long userId;
 }

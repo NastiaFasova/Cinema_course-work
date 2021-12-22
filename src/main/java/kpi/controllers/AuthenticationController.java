@@ -31,14 +31,12 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final UserService userService;
     private final UserMapper userMapper;
-    private final JwtTokenRepository jwtTokenRepository;
 
     public AuthenticationController(AuthenticationService authenticationService,
-                                    UserService userService, UserMapper userMapper, JwtTokenRepository jwtTokenRepository) {
+                                    UserService userService, UserMapper userMapper) {
         this.authenticationService = authenticationService;
         this.userService = userService;
         this.userMapper = userMapper;
-        this.jwtTokenRepository = jwtTokenRepository;
     }
 
     @PostMapping("/register")

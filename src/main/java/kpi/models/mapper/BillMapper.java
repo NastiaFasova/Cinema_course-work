@@ -2,13 +2,20 @@ package kpi.models.mapper;
 
 import kpi.models.Bill;
 import kpi.models.dto.BillDto;
+import kpi.service.UserService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BillMapper {
+    private final UserService userService;
+
+    public BillMapper(UserService userService) {
+        this.userService = userService;
+    }
+
     public BillDto getBillDto(Bill bill) {
         BillDto billDto = new BillDto();
-        billDto.setUser(bill.getUser());
+        billDto.setUserId(bill.getUser().getId());
         billDto.setAmountOfMoney(bill.getAmountOfMoney());
         billDto.setId(bill.getId());
         return billDto;
@@ -16,7 +23,7 @@ public class BillMapper {
 
     public Bill getBill(BillDto billDto) {
         Bill bill = new Bill();
-        bill.setUser(billDto.getUser());
+        bill.setUser(userService.get(billDto.getUserId()));
         bill.setId(billDto.getId());
         bill.setAmountOfMoney(billDto.getAmountOfMoney());
         return bill;
