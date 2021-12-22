@@ -42,6 +42,9 @@ public class MovieSessionMapper {
         movieSession.setShowTime((LocalDateTime.parse(movieSessionRequestDto.getShowTime())));
         CinemaHall cinemaHall = cinemaHallService.get(movieSessionRequestDto.getCinemaHallId());
         movieSession.setCinemaHall(cinemaHall);
+        movieSession.setCurrentTicketCount(movieSessionRequestDto.getCurrentTicketCount());
+        movieSession.setMaxTicketCount(movieSessionRequestDto.getMaxTicketCount());
+        movieSession.setPrice(movieSessionRequestDto.getPrice());
         Movie movie = movieService.getByTitle(movieSessionRequestDto.getMovieTitle());
         movieSession.setMovie(movie);
         return movieSession;
