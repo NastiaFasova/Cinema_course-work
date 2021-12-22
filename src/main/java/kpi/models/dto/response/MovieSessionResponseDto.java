@@ -12,8 +12,9 @@ public class MovieSessionResponseDto {
     private String movieTitle;
     private Long cinemaHallId;
     private String showTime;
-    private Integer maxTicketCount;
-    private Integer currentTicketCount;
+    private int maxTicketCount;
+    private int currentTicketCount;
+    private double price;
     private String apiId;
 
     public void setMovieSessionId(Long movieSessionId) {

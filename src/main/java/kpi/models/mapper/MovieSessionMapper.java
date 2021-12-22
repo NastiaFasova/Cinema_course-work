@@ -31,6 +31,7 @@ public class MovieSessionMapper {
         movieSessionResponseDto.setCurrentTicketCount(movieSession.getCurrentTicketCount());
         movieSessionResponseDto.setMaxTicketCount(movieSession.getMaxTicketCount());
         movieSessionResponseDto.setApiId(movieSession.getMovie().getApiId());
+        movieSessionResponseDto.setPrice(movieSession.getPrice());
         movieSessionResponseDto.setShowTime(movieSession.getShowTime()
                 .format(DateTimeFormatter.ISO_LOCAL_DATE));
         return movieSessionResponseDto;

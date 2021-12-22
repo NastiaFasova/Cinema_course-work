@@ -20,14 +20,17 @@ public class InjectDataController {
 
     private final MovieService movieService;
 
+    private final CinemaHallService cinemaHallService;
+
     public InjectDataController(RoleService roleService, UserService userService,
                                 BillService billService, ShoppingCartService shoppingCartService,
-                                MovieService movieService) {
+                                MovieService movieService, CinemaHallService cinemaHallService) {
         this.roleService = roleService;
         this.userService = userService;
         this.billService = billService;
         this.shoppingCartService = shoppingCartService;
         this.movieService = movieService;
+        this.cinemaHallService = cinemaHallService;
     }
 
     @PostConstruct
@@ -79,5 +82,6 @@ public class InjectDataController {
                 "Choose this one, if you want to spent your time with familiy and be satisfied")
                 .capacity(50)
                 .title("Hall A Green").build();
+        cinemaHallService.add(cinemaHall);
     }
 }
