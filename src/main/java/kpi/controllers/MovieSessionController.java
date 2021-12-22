@@ -56,13 +56,6 @@ public class MovieSessionController {
                 .collect(Collectors.toList());
     }
 
-    @PatchMapping("/{id}")
-    public MovieSessionResponseDto update(@RequestBody @Valid MovieSessionRequestDto movieSessionRequestDto,
-                                          @PathVariable("id") String id) {
-        return movieSessionMapper.getMovieSessionResponseDto(movieSessionService
-                .add(movieSessionMapper.getMovieSession(movieSessionRequestDto), id));
-    }
-
     @DeleteMapping("/{id}")
     public boolean deleteById(@PathVariable Long id) {
         return movieSessionService.deleteById(id);

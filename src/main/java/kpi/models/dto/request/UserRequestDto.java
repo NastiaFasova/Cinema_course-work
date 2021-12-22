@@ -9,17 +9,9 @@ import javax.validation.constraints.Size;
 
 @Setter
 @Getter
-@PasswordMatch()
 public class UserRequestDto {
     @EmailValidation
     private String email;
     @Size(min = 6)
     private String password;
-    @Size(min = 6)
-    private String repeatPassword;
-    @Size(min = 1)
-    private String firstname;
-    @Size(min = 1)
-    private String lastname;
-    private String avatarUrl;
 }

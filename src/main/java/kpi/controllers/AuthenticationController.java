@@ -2,6 +2,7 @@ package kpi.controllers;
 
 import kpi.exception.AuthenticationException;
 import kpi.exception.DuplicateEmailException;
+import kpi.models.dto.request.UserRegistrationDto;
 import kpi.models.dto.request.UserRequestDto;
 import kpi.models.dto.response.UserResponseDto;
 import kpi.models.mapper.UserMapper;
@@ -36,24 +37,19 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public @ResponseBody UserResponseDto addUser(@RequestBody @Valid UserRequestDto userRequestDto)
+    public @ResponseBody UserResponseDto addUser(@RequestBody @Valid UserRegistrationDto userRegistrationDto)
             throws AuthenticationException {
-        if (userService.getByEmail(userRequestDto.getEmail()) != null) {
+        if (userService.getByEmail(userRegistrationDto.getEmail()) != null) {
             throw new DuplicateEmailException("There ia already a registered user with this email");
         }
         return userMapper.getUserResponseDto(authenticationService
-                .register(userRequestDto.getEmail(), userRequestDto.getPassword()));
+                .register(userRegistrationDto.getEmail(), userRegistrationDto.getPassword()));
     }
 
     @PostMapping(path = "/login")
     public @ResponseBody UserResponseDto getAuthUser(@RequestBody @Validated UserRequestDto userRequestDto)  {
-        kpi.models.User loggedInUser = Objects.nonNull(userRequestDto)
-                ? userService.getByEmail(userRequestDto.getEmail()) : null;
-        if (loggedInUser != null && passwordEncoder.matches(userRequestDto.getPassword(),
-                loggedInUser.getPassword())) {
-            return userMapper.getUserResponseDto(loggedInUser);
-        }
-        throw new AuthenticationException("Wrong login or password");
+        return userMapper.getUserResponseDto(authenticationService.login(userRequestDto.getEmail(),
+                userRequestDto.getPassword()));
     }
 
 }

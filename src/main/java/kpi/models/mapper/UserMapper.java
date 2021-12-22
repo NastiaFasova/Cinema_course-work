@@ -20,9 +20,6 @@ public class UserMapper {
     public User getUser(UserRequestDto userRequestDto) {
         User user = new User();
         user.setEmail(userRequestDto.getEmail());
-        user.setFirstname(userRequestDto.getFirstname());
-        user.setLastname(userRequestDto.getLastname());
-        user.setAvatarUrl(userRequestDto.getAvatarUrl());
         return user;
     }
 }
