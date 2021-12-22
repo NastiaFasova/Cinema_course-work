@@ -17,6 +17,7 @@ public class UserMapper {
         userResponseDto.setAvatarUrl(user.getAvatarUrl());
         userResponseDto.setRole(user.getRoles().toString());
         userResponseDto.setBlocked(user.isBlocked());
+        userResponseDto.setBill(user.getBill().getAmountOfMoney());
         return userResponseDto;
     }
 

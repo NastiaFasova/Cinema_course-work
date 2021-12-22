@@ -15,4 +15,5 @@ public class UserResponseDto {
     private String role;
     private boolean blocked;
     private CsrfToken token;
+    private Double bill;
 }

@@ -12,6 +12,8 @@ public class MovieSessionResponseDto {
     private String movieTitle;
     private Long cinemaHallId;
     private String showTime;
+    private Integer maxTicketCount;
+    private Integer currentTicketCount;
 
     public void setMovieSessionId(Long movieSessionId) {
         this.movieSessionId = movieSessionId;
