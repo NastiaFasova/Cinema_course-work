@@ -43,7 +43,7 @@ public class InjectDataController {
         User admin = new User();
         admin.setEmail("admin@gmail.com");
         admin.setPassword("999999");
-        admin.setFirstname("Bladyslav");
+        admin.setFirstname("Vladyslav");
         admin.setLastname("Kornilov");
         admin.setRoles(Set.of(adminRole));
         roleService.add(adminRole);

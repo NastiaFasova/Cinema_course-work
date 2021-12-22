@@ -49,7 +49,7 @@ public class AuthenticationController {
             throw new DuplicateEmailException("There ia already a registered user with this email");
         }
         return userMapper.getUserResponseDto(authenticationService
-                .register(userRegistrationDto.getEmail(), userRegistrationDto.getPassword()));
+                .register(userMapper.getUser(userRegistrationDto)));
     }
 
     @PostMapping(path = "/login")
