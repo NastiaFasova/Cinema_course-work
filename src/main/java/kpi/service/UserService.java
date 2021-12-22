@@ -18,4 +18,6 @@ public interface UserService {
     User unblock(Long id);
 
     List<User> findAll(String keyword);
+
+    List<User> findAll();
 }

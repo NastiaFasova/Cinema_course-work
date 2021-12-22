@@ -8,7 +8,6 @@ import javax.validation.constraints.Size;
 
 @Data
 public class CinemaHallDto {
-    @NotNull(message = "CinemaHallId can't be null")
     private Long id;
     @NotNull(message = "Capacity of a cinemaHall can't be null")
     @Min(50)

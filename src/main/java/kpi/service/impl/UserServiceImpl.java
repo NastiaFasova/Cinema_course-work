@@ -68,4 +68,9 @@ public class UserServiceImpl implements UserService {
         }
         return userRepository.findAllByLastnameContaining(keyword);
     }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 }
