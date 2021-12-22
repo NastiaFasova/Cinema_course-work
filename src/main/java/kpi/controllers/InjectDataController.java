@@ -5,6 +5,7 @@ import kpi.models.Role;
 import kpi.models.User;
 import kpi.service.BillService;
 import kpi.service.RoleService;
+import kpi.service.ShoppingCartService;
 import kpi.service.UserService;
 import java.util.Set;
 import javax.annotation.PostConstruct;
@@ -19,10 +20,14 @@ public class InjectDataController {
 
     private final BillService billService;
 
-    public InjectDataController(RoleService roleService, UserService userService, BillService billService) {
+    private final ShoppingCartService shoppingCartService;
+
+    public InjectDataController(RoleService roleService, UserService userService,
+                                BillService billService, ShoppingCartService shoppingCartService) {
         this.roleService = roleService;
         this.userService = userService;
         this.billService = billService;
+        this.shoppingCartService = shoppingCartService;
     }
 
     @PostConstruct
@@ -35,11 +40,14 @@ public class InjectDataController {
         user.setPassword("111111");
         user.setFirstname("Oleksyy");
         user.setLastname("Prylipko");
+        user.setAvatarUrl("https://cq-esports.com/storage/uploads/posts/1197054/1.jpg");
         user.setRoles(Set.of(userRole));
         roleService.add(userRole);
+        shoppingCartService.registerNewShoppingCart(user);
         userService.add(user);
         bill.setUser(user);
         billService.save(bill);
+
 
         Role adminRole = new Role();
         adminRole.setRoleName(Role.RoleName.ADMIN);
