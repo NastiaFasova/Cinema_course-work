@@ -28,6 +28,6 @@ public class Role {
 
     @Override
     public String toString() {
-        return "roleName:" + roleName;
+        return roleName.toString();
     }
 }
