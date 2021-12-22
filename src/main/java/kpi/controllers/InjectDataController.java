@@ -42,10 +42,6 @@ public class InjectDataController {
         user.setAvatarUrl("https://cq-esports.com/storage/uploads/posts/1197054/1.jpg");
         user.setRoles(Set.of(userRole));
         roleService.add(userRole);
-        shoppingCartService.registerNewShoppingCart(user);
-        Bill bill = new Bill(user.getId(), 125_000D);
-        bill.setUser(user);
-        user.setBill(bill);
         userService.add(user);
 
         Role adminRole = new Role();
@@ -58,8 +54,5 @@ public class InjectDataController {
         admin.setRoles(Set.of(adminRole));
         roleService.add(adminRole);
         userService.add(admin);
-        Bill billAdmin = new Bill(admin.getId(), 12_000D);
-        billAdmin.setUser(admin);
-        billService.save(billAdmin);
     }
 }
