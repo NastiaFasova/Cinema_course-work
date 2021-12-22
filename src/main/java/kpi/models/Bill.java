@@ -22,7 +22,6 @@ public class Bill {
     private Double amountOfMoney;
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private User user;
 
     public Bill(Double amountOfMoney) {
@@ -32,5 +31,8 @@ public class Bill {
     public Bill(Long id, Double amountOfMoney) {
         this.id = id;
         this.amountOfMoney = amountOfMoney;
+    }
+    public Bill(Long id) {
+        this.id = id;
     }
 }

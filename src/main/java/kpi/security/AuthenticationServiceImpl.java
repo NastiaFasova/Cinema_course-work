@@ -1,8 +1,10 @@
 package kpi.security;
 
 import kpi.exception.AuthenticationException;
+import kpi.models.Bill;
 import kpi.models.Role;
 import kpi.models.User;
+import kpi.service.BillService;
 import kpi.service.RoleService;
 import kpi.service.ShoppingCartService;
 import kpi.service.UserService;
@@ -22,14 +24,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final BillService billService;
+
     public AuthenticationServiceImpl(UserService userService,
                                      ShoppingCartService shoppingCartService,
                                      RoleService roleService,
-                                     PasswordEncoder passwordEncoder) {
+                                     PasswordEncoder passwordEncoder, BillService billService) {
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
+        this.billService = billService;
     }
 
     @Override

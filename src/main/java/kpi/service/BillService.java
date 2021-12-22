@@ -1,6 +1,7 @@
 package kpi.service;
 
 import kpi.models.Bill;
+import kpi.models.User;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface BillService {
     Bill findById(Long billId);
 
     List<Bill> findAll();
+
+    Bill registerNewBill(User newUser);
 }
