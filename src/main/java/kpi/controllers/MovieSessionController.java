@@ -41,6 +41,12 @@ public class MovieSessionController {
                 .collect(Collectors.toList());
     }
 
+    @PatchMapping("/{id}")
+    public MovieSessionResponseDto update(@RequestBody @Valid MovieSessionRequestDto movieSessionRequestDto,
+                                          @PathVariable("id") String id) {
+        return movieSessionMapper.getMovieSessionResponseDto(movieSessionService
+                .add(movieSessionMapper.getMovieSession(movieSessionRequestDto), id));
+    }
 
     @GetMapping
     public @ResponseBody List<MovieSessionResponseDto> getAll() {

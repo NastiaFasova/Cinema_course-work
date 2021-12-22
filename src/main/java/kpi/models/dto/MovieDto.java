@@ -7,7 +7,6 @@ import javax.validation.constraints.Size;
 
 @Data
 public class MovieDto {
-    @NotNull(message = "MovieId can't be null")
     private Long id;
     @NotNull(message = "MovieTitle can't be null")
     @Size(min = 1, max = 40)

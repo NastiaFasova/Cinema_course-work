@@ -1,5 +1,6 @@
 package kpi.service.impl;
 
+import kpi.models.CinemaHall;
 import kpi.repository.MovieSessionRepository;
 import kpi.models.MovieSession;
 import kpi.service.MovieSessionService;
