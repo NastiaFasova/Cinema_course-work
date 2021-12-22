@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/movie-sessions")
 public class MovieSessionController {
 
@@ -48,6 +49,7 @@ public class MovieSessionController {
     }
 
     @GetMapping
+    @CrossOrigin
     public List<MovieSessionResponseDto> getAll() {
         List<MovieSession> movieSessions = movieSessionService.getAll();
         return movieSessions.stream()

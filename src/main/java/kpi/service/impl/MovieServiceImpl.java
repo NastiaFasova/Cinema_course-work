@@ -50,4 +50,9 @@ public class MovieServiceImpl implements MovieService {
         movieRepository.deleteById(id);
         return true;
     }
+
+    @Override
+    public Movie getByApi(String apiId) {
+        return movieRepository.findByApiId(apiId);
+    }
 }

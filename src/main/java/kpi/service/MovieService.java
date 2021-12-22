@@ -15,4 +15,6 @@ public interface MovieService {
     Movie getByTitle(String title);
 
     boolean deleteById(Long id);
+
+    Movie getByApi(String apiId);
 }

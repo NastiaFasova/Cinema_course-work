@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
@@ -34,6 +35,7 @@ public class UserController {
     }
 
     @GetMapping
+    @CrossOrigin
     public List<User> viewUsers(@RequestParam(required = false) String keyword) {
         return userService.findAll(keyword);
     }
