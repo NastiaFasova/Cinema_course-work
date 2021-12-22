@@ -1,5 +1,6 @@
 package kpi.service.impl;
 
+import kpi.models.Bill;
 import kpi.repository.UserRepository;
 import kpi.models.User;
 import kpi.service.UserService;

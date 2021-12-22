@@ -1,5 +1,6 @@
 package kpi.models.dto.response;
 
+import kpi.models.Bill;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -15,5 +16,5 @@ public class UserResponseDto {
     private String role;
     private boolean blocked;
     private CsrfToken token;
-    private Double bill;
+    private Bill bill;
 }

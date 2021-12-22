@@ -56,6 +56,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         newUser.setBlocked(user.isBlocked());
         Role role = roleService.getRoleByName("USER");
         newUser.setRoles(Set.of(role));
+        Bill bill = new Bill(0D);
+        bill.setUser(newUser);
+        newUser.setBill(bill);
         userService.add(newUser);
         shoppingCartService.registerNewShoppingCart(newUser);
         return newUser;

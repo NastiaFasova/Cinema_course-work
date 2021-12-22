@@ -39,13 +39,14 @@ public class InjectDataController {
         user.setPassword("111111");
         user.setFirstname("Oleksyy");
         user.setLastname("Prylipko");
+        user.setAvatarUrl("https://cq-esports.com/storage/uploads/posts/1197054/1.jpg");
         user.setRoles(Set.of(userRole));
         roleService.add(userRole);
         shoppingCartService.registerNewShoppingCart(user);
-        userService.add(user);
         Bill bill = new Bill(user.getId(), 125_000D);
         bill.setUser(user);
-        billService.save(bill);
+        user.setBill(bill);
+        userService.add(user);
 
         Role adminRole = new Role();
         adminRole.setRoleName(Role.RoleName.ADMIN);

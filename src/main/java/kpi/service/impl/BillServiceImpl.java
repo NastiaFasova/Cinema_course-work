@@ -26,11 +26,7 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public Bill save(Bill bill) {
-        User user = userRepository.findById(bill.getUser().getId())
-                .orElseThrow(() -> new NotFoundByIdException("The user can't be found by id"));
-        bill.setId(user.getId());
-        billRepository.save(bill);
-        return bill;
+        return billRepository.save(bill);
     }
 
     @Override
