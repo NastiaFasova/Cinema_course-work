@@ -46,18 +46,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.NEVER)
                 .and()
-                .addFilterAt(new JwtCsrfFilter(jwtTokenRepository, resolver), CsrfFilter.class)
+//                .addFilterAt(new JwtCsrfFilter(jwtTokenRepository, resolver), CsrfFilter.class)
                 .csrf().ignoringAntMatchers("/**")
                 .and()
                 .authorizeRequests()
+                .antMatchers("/login")
+                .authenticated()
                 .antMatchers(HttpMethod.POST, "/movies/**",
                         "/movie-sessions/**", "/cinema-halls/**")
                 .hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/orders/complete",
-                        "/shopping-carts/**")
+                        "/shopping-carts/**", "/bill")
+                .hasRole("USER")
+                .antMatchers(HttpMethod.GET, "/bill")
                 .hasRole("USER")
                 .antMatchers(HttpMethod.GET, "/register", "/login", "/hello", "/movies",
                         "/movie-sessions", "/cinema-halls", "/orders")
@@ -75,8 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/register", "/movies", "/login", "/movie-sessions",
-                "/cinema-halls", "/users");
+        web.ignoring().antMatchers("/register", "/movies");
     }
 
     @Bean

@@ -8,6 +8,7 @@ import kpi.service.BillService;
 import kpi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,8 @@ public class BillController {
     }
 
     @GetMapping("/bill")
-    public BillDto viewBill(Authentication authentication) {
+    public BillDto viewBill() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getByEmail(authentication.getName());
         return billMapper.getBillDto(user.getBill());
     }

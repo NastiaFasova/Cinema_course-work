@@ -2,6 +2,7 @@ package kpi.models.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.web.csrf.CsrfToken;
 
 @Setter
 @Getter
@@ -12,4 +13,5 @@ public class UserResponseDto {
     private String lastname;
     private String avatarUrl;
     private String role;
+    private CsrfToken token;
 }

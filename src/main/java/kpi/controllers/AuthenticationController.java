@@ -1,5 +1,8 @@
 package kpi.controllers;
 
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import kpi.exception.AuthenticationException;
 import kpi.exception.DuplicateEmailException;
 import kpi.models.dto.request.UserRegistrationDto;
@@ -8,9 +11,18 @@ import kpi.models.dto.response.UserResponseDto;
 import kpi.models.mapper.UserMapper;
 import kpi.security.AuthenticationService;
 import javax.validation.Valid;
+
+import kpi.security.JwtTokenRepository;
 import kpi.service.UserService;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.DefaultCsrfToken;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin
@@ -19,12 +31,14 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final UserService userService;
     private final UserMapper userMapper;
+    private final JwtTokenRepository jwtTokenRepository;
 
     public AuthenticationController(AuthenticationService authenticationService,
-                                    UserService userService, UserMapper userMapper) {
+                                    UserService userService, UserMapper userMapper, JwtTokenRepository jwtTokenRepository) {
         this.authenticationService = authenticationService;
         this.userService = userService;
         this.userMapper = userMapper;
+        this.jwtTokenRepository = jwtTokenRepository;
     }
 
     @PostMapping("/register")
@@ -41,8 +55,32 @@ public class AuthenticationController {
     @PostMapping(path = "/login")
     @CrossOrigin
     public @ResponseBody UserResponseDto getAuthUser(@RequestBody @Validated UserRequestDto userRequestDto)  {
-        return userMapper.getUserResponseDto(authenticationService.login(userRequestDto.getEmail(),
+        UserResponseDto responseDto = userMapper.getUserResponseDto(authenticationService.login(userRequestDto.getEmail(),
                 userRequestDto.getPassword()));
+        responseDto.setToken(generateToken());
+        return responseDto;
+    }
+
+    private CsrfToken generateToken() {
+        String id = UUID.randomUUID().toString().replace("-", "");
+        Date now = new Date();
+        Date exp = Date.from(LocalDateTime.now().plusDays(3)
+                .atZone(ZoneId.systemDefault()).toInstant());
+
+        String token = "";
+        try {
+            token = Jwts.builder()
+                    .setId(id)
+                    .setIssuedAt(now)
+                    .setNotBefore(now)
+                    .setExpiration(exp)
+                    .signWith(SignatureAlgorithm.HS256, "secret")
+                    .compact();
+        } catch (JwtException e) {
+            e.printStackTrace();
+            //ignore
+        }
+        return new DefaultCsrfToken("x-csrf-token", "_csrf", token);
     }
 
 }
