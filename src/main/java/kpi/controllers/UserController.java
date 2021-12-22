@@ -1,5 +1,6 @@
 package kpi.controllers;
 
+import kpi.models.Movie;
 import kpi.models.User;
 import kpi.models.dto.request.UserRequestDto;
 import kpi.models.dto.response.UserResponseDto;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
@@ -36,8 +38,11 @@ public class UserController {
 
     @GetMapping
     @CrossOrigin
-    public List<User> viewUsers(@RequestParam(required = false) String keyword) {
-        return userService.findAll(keyword);
+    public List<UserResponseDto> viewUsers(@RequestParam(required = false) String keyword) {
+        List<User> users = userService.findAll(keyword);
+        return users.stream()
+                .map(userMapper::getUserResponseDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/block/{id}")

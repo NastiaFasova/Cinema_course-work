@@ -1,12 +1,8 @@
 package kpi.controllers;
 
-import kpi.models.Bill;
-import kpi.models.Role;
-import kpi.models.User;
-import kpi.service.BillService;
-import kpi.service.RoleService;
-import kpi.service.ShoppingCartService;
-import kpi.service.UserService;
+import kpi.models.*;
+import kpi.service.*;
+
 import java.util.Set;
 import javax.annotation.PostConstruct;
 
@@ -22,12 +18,16 @@ public class InjectDataController {
 
     private final ShoppingCartService shoppingCartService;
 
+    private final MovieService movieService;
+
     public InjectDataController(RoleService roleService, UserService userService,
-                                BillService billService, ShoppingCartService shoppingCartService) {
+                                BillService billService, ShoppingCartService shoppingCartService,
+                                MovieService movieService) {
         this.roleService = roleService;
         this.userService = userService;
         this.billService = billService;
         this.shoppingCartService = shoppingCartService;
+        this.movieService = movieService;
     }
 
     @PostConstruct
@@ -62,5 +62,22 @@ public class InjectDataController {
         Bill billAdmin = new Bill(admin.getId(), 12_000D);
         billAdmin.setUser(admin);
         billService.save(billAdmin);
+
+        Movie movie1 = new Movie("tt0137523", "http://www.omdbapi.com/?apikey=***&i=tt0137523",
+                "Бойцовский клуб");
+        Movie movie2 = new Movie("tt1270797", "http://www.omdbapi.com/?apikey=***&i=tt1270797",
+                "Веном");
+        Movie movie3 = new Movie("tt6334354",
+                "http://www.omdbapi.com/?apikey=***&i=tt6334354", "Отряд самоубийц: Миссия навылет");
+        Movie movie4 = new Movie("tt1160419", "http://www.omdbapi.com/?apikey=***&i=tt1160419",
+                "Дюна");
+        movieService.add(movie1);
+        movieService.add(movie2);
+        movieService.add(movie3);
+        movieService.add(movie4);
+        CinemaHall cinemaHall = CinemaHall.builder().description("A simple, comfortable hall for families. " +
+                "Choose this one, if you want to spent your time with familiy and be satisfied")
+                .capacity(50)
+                .title("Hall A Green").build();
     }
 }
