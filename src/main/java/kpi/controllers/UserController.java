@@ -49,4 +49,9 @@ public class UserController {
     public UserResponseDto unblock(@PathVariable(value = "id") long id) {
         return userMapper.getUserResponseDto(userService.unblock(id));
     }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteById(@PathVariable Long id) {
+        return userService.deleteById(id);
+    }
 }

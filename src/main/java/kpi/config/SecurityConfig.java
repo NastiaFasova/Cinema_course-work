@@ -51,7 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.NEVER)
                 .and()
-//                .addFilterAt(new JwtCsrfFilter(jwtTokenRepository, resolver), CsrfFilter.class)
                 .csrf().ignoringAntMatchers("/**")
                 .and()
                 .authorizeRequests()
@@ -59,6 +58,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .antMatchers(HttpMethod.POST, "/movies/**",
                         "/movie-sessions/**", "/cinema-halls/**")
+                .hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/movies/**",
+                        "/movie-sessions/**", "/cinema-halls/**", "/users/**")
+                .hasRole("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/movies/**",
+                        "/movie-sessions/**", "/cinema-halls/**", "/users/**")
                 .hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/orders/complete",
                         "/shopping-carts/**", "/bill")

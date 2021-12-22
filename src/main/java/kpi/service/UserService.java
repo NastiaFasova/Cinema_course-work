@@ -20,4 +20,6 @@ public interface UserService {
     List<User> findAll(String keyword);
 
     List<User> findAll();
+
+    boolean deleteById(Long id);
 }
