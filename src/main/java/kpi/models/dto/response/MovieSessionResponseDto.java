@@ -14,6 +14,7 @@ public class MovieSessionResponseDto {
     private String showTime;
     private Integer maxTicketCount;
     private Integer currentTicketCount;
+    private String apiId;
 
     public void setMovieSessionId(Long movieSessionId) {
         this.movieSessionId = movieSessionId;
