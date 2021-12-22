@@ -54,4 +54,9 @@ public class UserController {
     public boolean deleteById(@PathVariable Long id) {
         return userService.deleteById(id);
     }
+
+    @GetMapping("/{id}")
+    public UserResponseDto getById(@PathVariable Long id) {
+        return userMapper.getUserResponseDto(userService.get(id));
+    }
 }
