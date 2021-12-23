@@ -3,16 +3,16 @@ package kpi.controllers;
 import kpi.models.MovieSession;
 import kpi.models.ShoppingCart;
 import kpi.models.User;
+import kpi.models.dto.request.ShoppingCartRequestDto;
 import kpi.models.dto.response.ShoppingCartResponseDto;
 import kpi.models.mapper.ShoppingCartMapper;
 import kpi.service.MovieSessionService;
 import kpi.service.ShoppingCartService;
 import kpi.service.UserService;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/shopping-carts")
@@ -34,9 +34,10 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/add-movie-session")
-    public ShoppingCartResponseDto addMovieSession(Authentication authentication, Long movieSessionId) {
+    public ShoppingCartResponseDto addMovieSession(Authentication authentication,
+                                                   @RequestBody @Valid ShoppingCartRequestDto shoppingCartRequestDto) {
         User user = userService.getByEmail(authentication.getName());
-        MovieSession movieSession = movieSessionService.get(movieSessionId);
+        MovieSession movieSession = movieSessionService.get(shoppingCartRequestDto.getMovieSessionId());
         return shoppingCartMapper.getShoppingCartResponseDto(shoppingCartService
                 .addSession(movieSession, user));
     }

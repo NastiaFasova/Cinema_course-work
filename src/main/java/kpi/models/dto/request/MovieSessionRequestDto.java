@@ -1,5 +1,6 @@
 package kpi.models.dto.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.validation.constraints.Min;
@@ -8,6 +9,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Getter
+@AllArgsConstructor
 public class MovieSessionRequestDto {
     @NotNull(message = "MovieTitle can't be null")
     @Size(min = 1, max = 40)

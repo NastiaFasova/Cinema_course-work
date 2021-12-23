@@ -1,6 +1,7 @@
 package kpi.controllers;
 
 import kpi.models.*;
+import kpi.models.dto.request.MovieSessionRequestDto;
 import kpi.service.*;
 
 import java.util.Set;
@@ -24,9 +25,11 @@ public class InjectDataController {
 
     private final BillController billController;
 
+    private final MovieSessionController movieSessionController;
+
     public InjectDataController(RoleService roleService, UserService userService,
                                 BillService billService, ShoppingCartService shoppingCartService,
-                                MovieService movieService, CinemaHallService cinemaHallService, BillController billController) {
+                                MovieService movieService, CinemaHallService cinemaHallService, BillController billController, MovieSessionController movieSessionController) {
         this.roleService = roleService;
         this.userService = userService;
         this.billService = billService;
@@ -34,6 +37,7 @@ public class InjectDataController {
         this.movieService = movieService;
         this.cinemaHallService = cinemaHallService;
         this.billController = billController;
+        this.movieSessionController = movieSessionController;
     }
 
     @PostConstruct
@@ -96,5 +100,10 @@ public class InjectDataController {
         cinemaHallService.add(cinemaHall1);
         cinemaHallService.add(cinemaHall2);
         cinemaHallService.add(cinemaHall3);
+        MovieSessionRequestDto movieSession
+                = new MovieSessionRequestDto("Веном", 1L
+                ,"2021-12-22T16:16:54.482",
+                150, 0, 150);
+        movieSessionController.add(movieSession);
     }
 }
