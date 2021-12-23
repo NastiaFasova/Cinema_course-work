@@ -1,5 +1,6 @@
 package kpi.models.dto.response;
 
+import kpi.models.Ticket;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,5 +11,5 @@ import java.util.List;
 @Getter
 public class ShoppingCartResponseDto {
     private Long id;
-    private List<Long> ticketsId = new ArrayList<>();
+    private List<TicketResponseDto> tickets = new ArrayList<>();
 }
