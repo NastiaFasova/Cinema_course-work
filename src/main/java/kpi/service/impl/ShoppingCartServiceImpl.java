@@ -69,6 +69,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 break;
             }
         }
-        return shoppingCart;
+        return shoppingCartRepository.save(shoppingCart);
     }
 }
