@@ -19,7 +19,6 @@ public class MovieSessionRequestDto {
     @Positive
     @Min(0)
     private int maxTicketCount;
-    @Positive
     @Min(0)
     private int currentTicketCount;
     @Positive

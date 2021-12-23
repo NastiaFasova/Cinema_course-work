@@ -53,6 +53,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers(
+                        "/v2/api-docs",
+                        "/swagger-resources/**",
+                        "/swagger-ui.html",
+                        "/webjars/**",
+                        "/swagger.json")
+                .permitAll()
                 .antMatchers("/login")
                 .authenticated()
                 .antMatchers(HttpMethod.POST, "/movies/**",
