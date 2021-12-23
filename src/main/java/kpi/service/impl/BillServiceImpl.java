@@ -39,7 +39,9 @@ public class BillServiceImpl implements BillService {
     public Bill save(Bill bill, Long id) {
         Bill current = findById(id);
         current.setUser(bill.getUser());
-        current.setAmountOfMoney(bill.getAmountOfMoney());
+        Double money = current.getAmountOfMoney();
+        Double actual = money + bill.getAmountOfMoney();
+        current.setAmountOfMoney(actual);
         return billRepository.save(current);
     }
 
