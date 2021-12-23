@@ -23,6 +23,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
@@ -41,7 +42,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({AuthenticationException.class})
     public ErrorInfo handleAuthenticationException(RuntimeException ex, HttpServletRequest request,
-                                                   HttpServletResponse response){
+                                                   HttpServletResponse response) {
         this.tokenRepository.clearToken(response);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         return new ErrorInfo(HttpStatus.BAD_REQUEST, UrlUtils.buildFullRequestUrl(request), "Invalid password or email");
@@ -49,32 +50,37 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({DuplicateMovieSession.class})
     public ErrorInfo handleDuplicateMovieSessionException(RuntimeException ex, HttpServletRequest request,
-                                                HttpServletResponse response){
+                                                          HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         return new ErrorInfo(HttpStatus.BAD_REQUEST, UrlUtils.buildFullRequestUrl(request), "This cinemaHall is booked another film " +
                 "on this time");
     }
 
     @ExceptionHandler({NoFreePlaceException.class})
     public ErrorInfo handleNoFreePlaceException(RuntimeException ex, HttpServletRequest request,
-                                                HttpServletResponse response){
+                                                HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         return new ErrorInfo(HttpStatus.BAD_REQUEST, UrlUtils.buildFullRequestUrl(request), "No free places for this movie-session");
     }
 
     @ExceptionHandler({NotEnoughMoneyException.class})
     public ErrorInfo handleNotEnoughMoneyException(RuntimeException ex, HttpServletRequest request,
-                                                   HttpServletResponse response){
+                                                   HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         return new ErrorInfo(HttpStatus.BAD_REQUEST, UrlUtils.buildFullRequestUrl(request), "Not enough money to buy a ticket");
     }
 
     @ExceptionHandler({DuplicateFilmException.class})
     public ErrorInfo handleDuplicateFilmExceptionException(RuntimeException ex, HttpServletRequest request,
-                                                           HttpServletResponse response){
+                                                           HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         return new ErrorInfo(HttpStatus.BAD_REQUEST, UrlUtils.buildFullRequestUrl(request), "This film is already in database");
     }
 
     @ExceptionHandler({DuplicateEmailException.class})
     public ErrorInfo handleDuplicateEmailException(RuntimeException ex, HttpServletRequest request,
-                                                   HttpServletResponse response){
+                                                   HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         return new ErrorInfo(HttpStatus.BAD_REQUEST, UrlUtils.buildFullRequestUrl(request), "There ia already a registered user with this email");
     }
 
@@ -147,7 +153,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-    @ExceptionHandler({ MethodArgumentTypeMismatchException.class })
+    @ExceptionHandler({MethodArgumentTypeMismatchException.class})
     public ResponseEntity<Object> handleMethodArgumentTypeMismatch(final MethodArgumentTypeMismatchException ex,
                                                                    final WebRequest request) {
         logger.info(ex.getClass().getName());
@@ -165,7 +171,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    @ExceptionHandler({ ConstraintViolationException.class })
+    @ExceptionHandler({ConstraintViolationException.class})
     public ResponseEntity<Object> handleConstraintViolation(final ConstraintViolationException ex,
                                                             final WebRequest request) {
         logger.info(ex.getClass().getName());
