@@ -2,7 +2,6 @@ package kpi.models;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
 import java.util.Set;
 import javax.persistence.*;
 

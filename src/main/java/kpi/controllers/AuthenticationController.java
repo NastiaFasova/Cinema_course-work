@@ -11,14 +11,11 @@ import kpi.models.dto.response.UserResponseDto;
 import kpi.models.mapper.UserMapper;
 import kpi.security.AuthenticationService;
 import javax.validation.Valid;
-
-import kpi.security.JwtTokenRepository;
 import kpi.service.UserService;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.DefaultCsrfToken;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;

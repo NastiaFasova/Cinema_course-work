@@ -44,38 +44,38 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                    HttpServletResponse response){
         this.tokenRepository.clearToken(response);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "Invalid password or email");
+        return new ErrorInfo(HttpStatus.BAD_REQUEST, UrlUtils.buildFullRequestUrl(request), "Invalid password or email");
     }
 
     @ExceptionHandler({DuplicateMovieSession.class})
     public ErrorInfo handleDuplicateMovieSessionException(RuntimeException ex, HttpServletRequest request,
                                                 HttpServletResponse response){
-        return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "This cinemaHall is booked another film " +
+        return new ErrorInfo(HttpStatus.BAD_REQUEST, UrlUtils.buildFullRequestUrl(request), "This cinemaHall is booked another film " +
                 "on this time");
     }
 
     @ExceptionHandler({NoFreePlaceException.class})
     public ErrorInfo handleNoFreePlaceException(RuntimeException ex, HttpServletRequest request,
                                                 HttpServletResponse response){
-        return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "No free places for this movie-session");
+        return new ErrorInfo(HttpStatus.BAD_REQUEST, UrlUtils.buildFullRequestUrl(request), "No free places for this movie-session");
     }
 
     @ExceptionHandler({NotEnoughMoneyException.class})
     public ErrorInfo handleNotEnoughMoneyException(RuntimeException ex, HttpServletRequest request,
                                                    HttpServletResponse response){
-        return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "Not enough money to buy a ticket");
+        return new ErrorInfo(HttpStatus.BAD_REQUEST, UrlUtils.buildFullRequestUrl(request), "Not enough money to buy a ticket");
     }
 
     @ExceptionHandler({DuplicateFilmException.class})
     public ErrorInfo handleDuplicateFilmExceptionException(RuntimeException ex, HttpServletRequest request,
                                                            HttpServletResponse response){
-        return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "This film is already in database");
+        return new ErrorInfo(HttpStatus.BAD_REQUEST, UrlUtils.buildFullRequestUrl(request), "This film is already in database");
     }
 
     @ExceptionHandler({DuplicateEmailException.class})
     public ErrorInfo handleDuplicateEmailException(RuntimeException ex, HttpServletRequest request,
                                                    HttpServletResponse response){
-        return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "There ia already a registered user with this email");
+        return new ErrorInfo(HttpStatus.BAD_REQUEST, UrlUtils.buildFullRequestUrl(request), "There ia already a registered user with this email");
     }
 
     @Override
@@ -226,10 +226,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Getter
     public class ErrorInfo {
+        private HttpStatus status;
         private final String url;
         private final String info;
 
-        ErrorInfo(String url, String info) {
+        ErrorInfo(HttpStatus status, String url, String info) {
+            this.status = status;
             this.url = url;
             this.info = info;
         }

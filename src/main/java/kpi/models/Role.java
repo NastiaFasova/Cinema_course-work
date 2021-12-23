@@ -1,7 +1,6 @@
 package kpi.models;
 
 import lombok.Data;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

@@ -1,12 +1,10 @@
 package kpi.service.impl;
 
-import kpi.models.Bill;
 import kpi.repository.UserRepository;
 import kpi.models.User;
 import kpi.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

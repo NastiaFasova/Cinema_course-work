@@ -23,20 +23,18 @@ public class InjectDataController {
 
     private final CinemaHallService cinemaHallService;
 
-    private final BillController billController;
-
     private final MovieSessionController movieSessionController;
 
     public InjectDataController(RoleService roleService, UserService userService,
                                 BillService billService, ShoppingCartService shoppingCartService,
-                                MovieService movieService, CinemaHallService cinemaHallService, BillController billController, MovieSessionController movieSessionController) {
+                                MovieService movieService, CinemaHallService cinemaHallService,
+                                MovieSessionController movieSessionController) {
         this.roleService = roleService;
         this.userService = userService;
         this.billService = billService;
         this.shoppingCartService = shoppingCartService;
         this.movieService = movieService;
         this.cinemaHallService = cinemaHallService;
-        this.billController = billController;
         this.movieSessionController = movieSessionController;
     }
 
@@ -48,8 +46,8 @@ public class InjectDataController {
         User user = new User();
         user.setEmail("user@ukr.net");
         user.setPassword("111111");
-        user.setFirstname("Oleksyy");
-        user.setLastname("Prylipko");
+        user.setFirstname("Vitalii");
+        user.setLastname("Tsal");
         user.setAvatarUrl("https://cq-esports.com/storage/uploads/posts/1197054/1.jpg");
         user.setRoles(Set.of(userRole));
         roleService.add(userRole);
@@ -102,7 +100,7 @@ public class InjectDataController {
         cinemaHallService.add(cinemaHall3);
         MovieSessionRequestDto movieSession
                 = new MovieSessionRequestDto("Веном", 1L
-                ,"2021-12-22T16:16:54.482",
+                , "2021-12-22T16:16:54.482",
                 150, 0, 150);
         movieSessionController.add(movieSession);
     }

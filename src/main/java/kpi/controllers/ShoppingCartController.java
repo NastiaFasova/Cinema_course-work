@@ -4,7 +4,6 @@ import kpi.models.MovieSession;
 import kpi.models.ShoppingCart;
 import kpi.models.User;
 import kpi.models.dto.request.ShoppingCartRequestDto;
-import kpi.models.dto.request.TicketRequestDto;
 import kpi.models.dto.response.ShoppingCartResponseDto;
 import kpi.models.mapper.ShoppingCartMapper;
 import kpi.service.MovieSessionService;
@@ -12,7 +11,6 @@ import kpi.service.ShoppingCartService;
 import kpi.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 @RestController

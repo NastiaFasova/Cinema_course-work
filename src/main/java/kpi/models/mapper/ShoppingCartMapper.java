@@ -2,9 +2,7 @@ package kpi.models.mapper;
 
 import kpi.models.ShoppingCart;
 import kpi.models.dto.response.ShoppingCartResponseDto;
-
 import org.springframework.stereotype.Component;
-
 import java.util.stream.Collectors;
 
 @Component

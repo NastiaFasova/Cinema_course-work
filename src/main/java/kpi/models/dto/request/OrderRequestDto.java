@@ -1,7 +1,6 @@
 package kpi.models.dto.request;
 
 import lombok.Getter;
-
 import javax.validation.constraints.NotNull;
 
 @Getter

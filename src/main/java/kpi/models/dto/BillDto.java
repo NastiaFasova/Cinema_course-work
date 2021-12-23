@@ -1,7 +1,6 @@
 package kpi.models.dto;
 
 import lombok.Data;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 

@@ -1,7 +1,6 @@
 package kpi.validation;
 
 import kpi.models.dto.request.UserRegistrationDto;
-import kpi.models.dto.request.UserRequestDto;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

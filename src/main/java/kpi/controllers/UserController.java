@@ -1,13 +1,11 @@
 package kpi.controllers;
 
-import kpi.models.Movie;
 import kpi.models.User;
 import kpi.models.dto.request.UserRequestDto;
 import kpi.models.dto.response.UserResponseDto;
 import kpi.models.mapper.UserMapper;
 import kpi.service.UserService;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;

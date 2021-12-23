@@ -1,10 +1,8 @@
 package kpi.models.dto.request;
 
 import kpi.validation.EmailValidation;
-import kpi.validation.PasswordMatch;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.validation.constraints.Size;
 
 @Setter
