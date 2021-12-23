@@ -2,6 +2,7 @@ package kpi.controllers;
 
 import kpi.models.Order;
 import kpi.models.ShoppingCart;
+import kpi.models.Ticket;
 import kpi.models.User;
 import kpi.models.dto.request.OrderRequestDto;
 import kpi.models.dto.response.OrderResponseDto;
@@ -9,6 +10,8 @@ import kpi.models.mapper.OrderMapper;
 import kpi.service.OrderService;
 import kpi.service.ShoppingCartService;
 import kpi.service.UserService;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
@@ -37,10 +40,11 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public OrderResponseDto complete(@RequestBody @Valid OrderRequestDto orderRequestDto) {
-        User user = userService.get(orderRequestDto.getUserId());
+    public OrderResponseDto complete(Authentication authentication) {
+        User user = userService.getByEmail(authentication.getName());
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
-        return orderMapper.getOrderResponseDto(orderService.completeOrder(shoppingCart.getTickets(), user));
+        List<Ticket> tickets = new ArrayList<>(shoppingCart.getTickets());
+        return orderMapper.getOrderResponseDto(orderService.completeOrder(tickets, user));
     }
 
     @GetMapping

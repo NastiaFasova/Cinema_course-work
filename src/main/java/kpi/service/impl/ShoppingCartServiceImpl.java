@@ -70,6 +70,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 break;
             }
         }
+        movieSession.setCurrentTicketCount(movieSession.getCurrentTicketCount() - 1);
         return shoppingCartRepository.save(shoppingCart);
     }
 }
