@@ -1,6 +1,7 @@
 package kpi.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ticket")
 @Data
+@EqualsAndHashCode
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

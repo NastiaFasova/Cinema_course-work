@@ -4,6 +4,7 @@ import kpi.models.MovieSession;
 import kpi.models.ShoppingCart;
 import kpi.models.User;
 import kpi.models.dto.request.ShoppingCartRequestDto;
+import kpi.models.dto.request.TicketRequestDto;
 import kpi.models.dto.response.ShoppingCartResponseDto;
 import kpi.models.mapper.ShoppingCartMapper;
 import kpi.service.MovieSessionService;
@@ -41,6 +42,17 @@ public class ShoppingCartController {
         return shoppingCartMapper.getShoppingCartResponseDto(shoppingCartService
                 .addSession(movieSession, user));
     }
+
+    @DeleteMapping("/remove-movie-session/{ticket-id}")
+    public ShoppingCartResponseDto removeMovieSession(Authentication authentication,
+                                                   @RequestBody @Valid ShoppingCartRequestDto shoppingCartRequestDto,
+                                                      @PathVariable("ticket-id") String ticketId) {
+        User user = userService.getByEmail(authentication.getName());
+        MovieSession movieSession = movieSessionService.get(shoppingCartRequestDto.getMovieSessionId());
+        return shoppingCartMapper.getShoppingCartResponseDto(shoppingCartService
+                .removeMovieSession(movieSession, user, Long.parseLong(ticketId)));
+    }
+
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getShoppingCartBuUserId(Authentication authentication) {

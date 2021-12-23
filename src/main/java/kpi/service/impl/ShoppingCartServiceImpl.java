@@ -10,6 +10,8 @@ import kpi.models.User;
 import kpi.service.ShoppingCartService;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
+
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
@@ -53,5 +55,20 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public void clear(ShoppingCart shoppingCart) {
         shoppingCart.getTickets().clear();
         shoppingCartRepository.save(shoppingCart);
+    }
+
+    @Override
+    public ShoppingCart removeMovieSession(MovieSession movieSession, User user, Long ticketId) {
+        ShoppingCart shoppingCart = shoppingCartRepository.findByUser(user);
+        Iterator<Ticket> t = shoppingCart.getTickets().iterator();
+        Ticket ticket = ticketRepository.getById(ticketId);
+        while (t.hasNext()) {
+            Ticket current = t.next();
+            if (current.equals(ticket)) {
+                t.remove();
+                break;
+            }
+        }
+        return shoppingCart;
     }
 }

@@ -12,4 +12,6 @@ public interface ShoppingCartService {
     void registerNewShoppingCart(User user);
 
     void clear(ShoppingCart shoppingCart);
+
+    ShoppingCart removeMovieSession(MovieSession movieSession, User user, Long ticketId);
 }
