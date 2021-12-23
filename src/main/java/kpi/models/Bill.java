@@ -10,7 +10,6 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="bills")
@@ -20,9 +19,10 @@ public class Bill {
     @Column(name = "id")
     private Long id;
     private Double amountOfMoney;
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+//    @OneToOne
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private User user;
+    private Long userId;
 
     public Bill(Double amountOfMoney) {
         this.amountOfMoney = amountOfMoney;

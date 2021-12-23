@@ -16,7 +16,7 @@ public class BillMapper {
 
     public BillDto getBillDto(Bill bill) {
         BillDto billDto = new BillDto();
-        billDto.setUserId(bill.getUser().getId());
+        billDto.setUserId(bill.getUserId());
         billDto.setAmountOfMoney(bill.getAmountOfMoney());
         billDto.setId(bill.getId());
         return billDto;
@@ -24,7 +24,7 @@ public class BillMapper {
 
     public Bill getBill(BillDto billDto) {
         Bill bill = new Bill();
-        bill.setUser(userService.get(billDto.getUserId()));
+        bill.setUserId(billDto.getUserId());
         bill.setId(billDto.getId());
         bill.setAmountOfMoney(billDto.getAmountOfMoney());
         return bill;
@@ -32,7 +32,7 @@ public class BillMapper {
 
     public BillResponseDto getBillResponseDto(Bill bill) {
         BillResponseDto billResponseDto = new BillResponseDto();
-        billResponseDto.setEmail(bill.getUser().getEmail());
+        billResponseDto.setEmail(userService.get(bill.getUserId()).getEmail());
         billResponseDto.setId(bill.getId());
         billResponseDto.setAmountOfMoney(bill.getAmountOfMoney());
         return billResponseDto;

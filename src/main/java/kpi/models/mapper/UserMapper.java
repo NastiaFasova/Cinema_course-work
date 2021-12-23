@@ -27,6 +27,7 @@ public class UserMapper {
         return user;
     }
 
+
     public User getUser(UserRegistrationDto userRegistrationDto) {
         User user = new User();
         user.setEmail(userRegistrationDto.getEmail());

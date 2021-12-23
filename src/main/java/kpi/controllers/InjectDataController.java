@@ -55,7 +55,7 @@ public class InjectDataController {
         roleService.add(userRole);
         shoppingCartService.registerNewShoppingCart(user);
         userService.add(user);
-        bill.setUser(user);
+        bill.setUserId(1L);
         billService.save(bill);
 
 
@@ -70,7 +70,7 @@ public class InjectDataController {
         roleService.add(adminRole);
         userService.add(admin);
         Bill billAdmin = new Bill(admin.getId(), 12_000D);
-        billAdmin.setUser(admin);
+        billAdmin.setUserId(2L);
         billService.save(billAdmin);
 
         Movie movie1 = new Movie("tt0137523", "http://www.omdbapi.com/?apikey=***&i=tt0137523",

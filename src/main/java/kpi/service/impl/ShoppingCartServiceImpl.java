@@ -29,11 +29,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         if (movieSession.getMaxTicketCount() - movieSession.getCurrentTicketCount() > 0) {
             Ticket ticket = new Ticket();
             ticket.setUser(user);
+            ticket.setPrice(movieSession.getPrice());
             ticket.setMovieSession(movieSession);
             ticketRepository.save(ticket);
             ShoppingCart shoppingCart = shoppingCartRepository.findByUser(user);
             shoppingCart.getTickets().add(ticket);
-            movieSession.setCurrentTicketCount(movieSession.getCurrentTicketCount() - 1);
+            movieSession.setCurrentTicketCount(movieSession.getCurrentTicketCount() + 1);
             return shoppingCartRepository.save(shoppingCart);
         }
         else throw new NoFreePlaceException("There is no free place for this movie-session");

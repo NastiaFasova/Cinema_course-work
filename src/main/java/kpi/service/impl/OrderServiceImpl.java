@@ -39,8 +39,8 @@ public class OrderServiceImpl implements OrderService {
             order.setOrderDate(LocalDateTime.now());
             order.setTickets(tickets);
             order.setUser(user);
-            orderRepository.save(order);
             shoppingCartService.clear(shoppingCartService.getByUser(user));
+            orderRepository.save(order);
             Bill bill = user.getBill();
             bill.setAmountOfMoney(bill.getAmountOfMoney() - overallPrice);
             billService.save(bill);

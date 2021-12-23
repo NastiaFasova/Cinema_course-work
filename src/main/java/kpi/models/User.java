@@ -1,6 +1,7 @@
 package kpi.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user")
 @Data
+@EqualsAndHashCode
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +23,7 @@ public class User {
     private String lastname;
     private String avatarUrl;
     @OneToOne(cascade =  CascadeType.ALL,
-            mappedBy = "user")
+             fetch = FetchType.LAZY)
     private Bill bill;
     private boolean blocked;
 
