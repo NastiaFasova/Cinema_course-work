@@ -43,7 +43,7 @@ public class InjectDataController {
     @PostConstruct
     public void injectRoles() {
         Role userRole = new Role();
-        Bill bill = new Bill(125_000D);
+        Bill bill = new Bill(0D);
         userRole.setRoleName(Role.RoleName.USER);
         User user = new User();
         user.setEmail("user@ukr.net");

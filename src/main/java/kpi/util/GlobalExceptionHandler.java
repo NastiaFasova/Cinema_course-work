@@ -63,7 +63,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({NotEnoughMoneyException.class})
     public ErrorInfo handleNotEnoughMoneyException(RuntimeException ex, HttpServletRequest request,
                                                    HttpServletResponse response){
-        return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "Not enough money to but a ticket");
+        return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "Not enough money to buy a ticket");
     }
 
     @ExceptionHandler({DuplicateFilmException.class})
