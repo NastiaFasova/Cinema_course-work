@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 public class OrderResponseDto {
     private Long id;
-    private List<Long> ticketsId = new ArrayList<>();
+    private List<TicketResponseDto> tickets = new ArrayList<>();
     private String orderDate;
     private Long userId;
 

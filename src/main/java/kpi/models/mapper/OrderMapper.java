@@ -9,12 +9,18 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OrderMapper {
+    private final TicketMapper ticketMapper;
+
+    public OrderMapper(TicketMapper ticketMapper) {
+        this.ticketMapper = ticketMapper;
+    }
+
     public OrderResponseDto getOrderResponseDto(Order order) {
         OrderResponseDto orderResponseDto = new OrderResponseDto();
         orderResponseDto.setId(order.getId());
         orderResponseDto.setOrderDate(order.getOrderDate().toString());
-        orderResponseDto.setTicketsId(order.getTickets().stream()
-                .map(Ticket::getId)
+        orderResponseDto.setTickets(order.getTickets().stream()
+                .map(ticketMapper::getTicketResponseDto)
                 .collect(Collectors.toList()));
         orderResponseDto.setUserId(order.getUser().getId());
         return orderResponseDto;
