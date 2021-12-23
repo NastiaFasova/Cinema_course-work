@@ -76,7 +76,6 @@ public class AuthenticationController {
                     .compact();
         } catch (JwtException e) {
             e.printStackTrace();
-            //ignore
         }
         return new DefaultCsrfToken("x-csrf-token", "_csrf", token);
     }

@@ -1,7 +1,6 @@
 package kpi.service.impl;
 import kpi.exception.NotFoundByIdException;
 import kpi.models.Bill;
-import kpi.models.ShoppingCart;
 import kpi.models.User;
 import kpi.repository.BillRepository;
 import kpi.repository.UserRepository;
@@ -39,8 +38,8 @@ public class BillServiceImpl implements BillService {
     @Override
     public Bill save(Bill bill, Long id) {
         Bill current = findById(id);
-        bill.setUser(current.getUser());
-        bill.setAmountOfMoney(current.getAmountOfMoney());
+        current.setUser(bill.getUser());
+        current.setAmountOfMoney(bill.getAmountOfMoney());
         return billRepository.save(current);
     }
 

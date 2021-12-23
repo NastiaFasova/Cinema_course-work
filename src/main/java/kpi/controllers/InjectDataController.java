@@ -22,15 +22,18 @@ public class InjectDataController {
 
     private final CinemaHallService cinemaHallService;
 
+    private final BillController billController;
+
     public InjectDataController(RoleService roleService, UserService userService,
                                 BillService billService, ShoppingCartService shoppingCartService,
-                                MovieService movieService, CinemaHallService cinemaHallService) {
+                                MovieService movieService, CinemaHallService cinemaHallService, BillController billController) {
         this.roleService = roleService;
         this.userService = userService;
         this.billService = billService;
         this.shoppingCartService = shoppingCartService;
         this.movieService = movieService;
         this.cinemaHallService = cinemaHallService;
+        this.billController = billController;
     }
 
     @PostConstruct
@@ -78,10 +81,18 @@ public class InjectDataController {
         movieService.add(movie2);
         movieService.add(movie3);
         movieService.add(movie4);
-        CinemaHall cinemaHall = CinemaHall.builder().description("A simple, comfortable hall for families. " +
+        CinemaHall cinemaHall1 = CinemaHall.builder().description("A simple, comfortable hall for families. " +
                 "Choose this one, if you want to spent your time with familiy and be satisfied")
                 .capacity(50)
                 .title("Hall A Green").build();
-        cinemaHallService.add(cinemaHall);
+        CinemaHall cinemaHall2 = CinemaHall.builder().description("The most comfortable hall in our theatre. It has a" +
+                " large choice of movies and you can afford a lot of different abilities here")
+                .capacity(150)
+                .title("Hall SSS - Super Class").build();
+        CinemaHall cinemaHall3 = CinemaHall.builder().description("A small hall for pleasant pastime. You can watch " +
+                "movies there with your friends or whatever.")
+                .capacity(50)
+                .title("Small Hall C").build();
+        cinemaHallService.add(cinemaHall1);
     }
 }
