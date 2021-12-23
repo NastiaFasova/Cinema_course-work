@@ -153,7 +153,77 @@ public class InjectDataController {
         MovieSessionRequestDto movieSession
                 = new MovieSessionRequestDto("Веном", 1L
                 , "2021-12-22T16:16:54.482",
-                150, 0, 150);
+                50, 0, 100);
+        MovieSessionRequestDto movieSession2
+                = new MovieSessionRequestDto("Ojing-eo geim", 2L
+                , "2021-12-24T16:16:54.482",
+                150, 0, 100);
+        MovieSessionRequestDto movieSession3
+                = new MovieSessionRequestDto("Stranger Things", 3L
+                , "2021-12-23T16:16:54.482",
+                50, 0, 100);
+        MovieSessionRequestDto movieSession4
+                = new MovieSessionRequestDto("The Last Duel", 4L
+                , "2021-12-22T17:16:54.482",
+                66, 0, 100);
+        MovieSessionRequestDto movieSession5
+                = new MovieSessionRequestDto("Alice in Worderland", 5L
+                , "2021-12-26T20:16:54.482",
+                80, 0, 90);
+        MovieSessionRequestDto movieSession6
+                = new MovieSessionRequestDto("Deadpool 2", 1L
+                , "2021-12-24T12:16:54.482",
+                50, 0, 80);
+        MovieSessionRequestDto movieSession7
+                = new MovieSessionRequestDto("The Many Saints of Newark", 2L
+                , "2021-12-22T18:16:54.482",
+                150, 0, 100);
+        MovieSessionRequestDto movieSession8
+                = new MovieSessionRequestDto("Babel", 3L
+                , "2021-12-22T20:00:54.482",
+                50, 0, 90);
+        MovieSessionRequestDto movieSession9
+                = new MovieSessionRequestDto("Pulp Fiction", 4L
+                , "2021-12-30T16:16:54.482",
+                66, 0, 10);
+        MovieSessionRequestDto movieSession10
+                = new MovieSessionRequestDto("Skyfall", 5L
+                , "2021-12-29T19:10:54.482",
+                80, 0, 100);
+        MovieSessionRequestDto movieSession11
+                = new MovieSessionRequestDto("Веном", 1L
+                , "2021-12-27T15:10:54.482",
+                50, 0, 100);
+        MovieSessionRequestDto movieSession12
+                = new MovieSessionRequestDto("La casa de papel", 2L
+                , "2021-12-25T20:10:54.482",
+                150, 0, 100);
+        MovieSessionRequestDto movieSession13
+                = new MovieSessionRequestDto("La casa de papel", 3L
+                , "2021-12-29T15:10:54.482",
+                50, 0, 100);
+        MovieSessionRequestDto movieSession14
+                = new MovieSessionRequestDto("Babel", 4L
+                , "2021-12-25T19:10:54.482",
+                66, 0, 100);
+        MovieSessionRequestDto movieSession15
+                = new MovieSessionRequestDto("Skyfall", 5L
+                , "2021-12-30T18:10:54.482",
+                80, 0, 90);
         movieSessionController.add(movieSession);
+        movieSessionController.add(movieSession2);
+        movieSessionController.add(movieSession3);
+        movieSessionController.add(movieSession4);
+        movieSessionController.add(movieSession5);
+        movieSessionController.add(movieSession6);
+        movieSessionController.add(movieSession7);
+        movieSessionController.add(movieSession8);
+        movieSessionController.add(movieSession9);
+        movieSessionController.add(movieSession10);
+        movieSessionController.add(movieSession11);
+        movieSessionController.add(movieSession12);
+        movieSessionController.add(movieSession13);
+        movieSessionController.add(movieSession14);
+        movieSessionController.add(movieSession15);
     }
 }
