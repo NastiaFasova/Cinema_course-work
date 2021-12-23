@@ -94,5 +94,7 @@ public class InjectDataController {
                 .capacity(50)
                 .title("Small Hall C").build();
         cinemaHallService.add(cinemaHall1);
+        cinemaHallService.add(cinemaHall2);
+        cinemaHallService.add(cinemaHall3);
     }
 }

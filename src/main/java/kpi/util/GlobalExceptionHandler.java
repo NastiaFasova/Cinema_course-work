@@ -47,6 +47,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "Invalid password or email");
     }
 
+    @ExceptionHandler({DuplicateMovieSession.class})
+    public ErrorInfo handleDuplicateMovieSessionException(RuntimeException ex, HttpServletRequest request,
+                                                HttpServletResponse response){
+        return new ErrorInfo(UrlUtils.buildFullRequestUrl(request), "This cinemaHall is booked another film " +
+                "on this time");
+    }
+
     @ExceptionHandler({NoFreePlaceException.class})
     public ErrorInfo handleNoFreePlaceException(RuntimeException ex, HttpServletRequest request,
                                                 HttpServletResponse response){

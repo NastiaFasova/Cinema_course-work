@@ -1,6 +1,6 @@
 package kpi.service.impl;
 
-import kpi.models.CinemaHall;
+import kpi.exception.DuplicateMovieSession;
 import kpi.repository.MovieSessionRepository;
 import kpi.models.MovieSession;
 import kpi.service.MovieSessionService;
@@ -26,6 +26,15 @@ public class MovieSessionServiceImpl implements MovieSessionService {
 
     @Override
     public MovieSession add(MovieSession session) {
+        LocalDate localDate = session.getShowTime().toLocalDate();
+        if (movieSessionRepository.findByCinemaHallAndShowTime(session.getCinemaHall().getId(),
+                localDate.atStartOfDay(), localDate.atTime(LocalTime.MAX)) != null) {
+            throw new DuplicateMovieSession();
+        }
+        if (movieSessionRepository.findByCinemaHallAndShowTimeAndMovieId(session.getMovie().getId(),
+                session.getCinemaHall().getId(), localDate.atStartOfDay(), localDate.atTime(LocalTime.MAX)) != null) {
+            throw new DuplicateMovieSession();
+        }
         return movieSessionRepository.save(session);
     }
 
